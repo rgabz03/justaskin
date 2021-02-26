@@ -3,6 +3,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import LoginIndex from "./components/login/index";
 import SignupIndex from "./components/signup/index";
+import HomeIndex from "./components/home/index";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 
@@ -45,7 +46,7 @@ const Home = () => {
 
   return (
       <React.Fragment>
-          <h1>Home</h1>
+          <HomeIndex/>
           <Footer/>
       </React.Fragment>
   );

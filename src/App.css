@@ -85,3 +85,23 @@ img.avatar {
   color: #0be7a4;
 }
 
+.timeline-profile-list {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+.timeline-question-profile-photo{
+  display: block;
+  max-width: 20%;
+  height: auto;
+}
+
+.timeline-top-blank-space {
+  height : 30vh;
+}
+
+.sm-font-size {
+  font-size: 13px;
+}
