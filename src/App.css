@@ -94,14 +94,52 @@ img.avatar {
 
 .timeline-question-profile-photo{
   display: block;
-  max-width: 20%;
+  /* max-width: 20%; */
+  max-width: 45px;
   height: auto;
 }
 
 .timeline-top-blank-space {
-  height : 30vh;
+  height : 25vh;
+}
+
+.timeline-bottom-space {
+  height: 25vh;
 }
 
 .sm-font-size {
   font-size: 13px;
+}
+
+.timeline-positing-time {
+  font-size: 10px;
+}
+
+.padding-bottom-top-2 {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+
+.padding-bottom-top-4 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+
+.padding-top-2 {
+  padding-top: 2px;
+}
+
+.padding-bottom-2 {
+  padding-top: 2px;
+}
+
+
+.padding-top-4 {
+  padding-top: 4px;
+}
+
+.padding-bottom-4 {
+  padding-top: 4px;
 }

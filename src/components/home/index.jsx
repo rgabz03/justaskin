@@ -33,6 +33,10 @@ export default class HomeIndex extends Component {
             <React.Fragment>
             <div className="col-md-6 col-sm-12">
                 <TimelineProfileList/>
+                <br/>
+                <TimeLineQuestion/>
+                <TimeLineQuestion/>
+                <TimeLineQuestion/>
                 <TimeLineQuestion/>
             </div>
             </React.Fragment>

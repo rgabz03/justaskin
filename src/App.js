@@ -13,7 +13,7 @@ function App() {
     <Router>
     <React.Fragment>
         {/* <Navbar/> */}
-        <main className="container">
+        <main className="">
             <Route path="/" exact component={Login} />
             <Route path="/home" exact component={Home} />
             <Route path="/profile" exact component={Profile} />
@@ -46,7 +46,9 @@ const Home = () => {
 
   return (
       <React.Fragment>
+          <div className="timeline-top-blank-space"></div>
           <HomeIndex/>
+          <div className="timeline-bottom-space"></div>
           <Footer/>
       </React.Fragment>
   );
