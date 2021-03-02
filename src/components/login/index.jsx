@@ -28,7 +28,7 @@ export default class LoginIndex extends Component {
     render() { 
         
         return (
-            <div className="col-md-6 col-sm-12">
+            <div className="col-md-12 col-sm-12">
                 <div className="login-form">
 
                     <div className="imgcontainer">
@@ -55,7 +55,8 @@ export default class LoginIndex extends Component {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary-new btn-md btn-block">Login</button>             
+                        {/* <button type="submit" className="btn btn-primary-new btn-md btn-block">Login</button>              */}
+                        <Link to="/home"  className="btn btn-primary-new btn-md btn-block">Login</Link>
                     </form>
                     <br/>
                     <div>

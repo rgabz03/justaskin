@@ -40,8 +40,8 @@ export default class LoginIndex extends Component {
                 <div className="row text-center">
                     <div className="col-12"><h5>Question: </h5></div>
                     <div className="col-12"><p className="sm-font-size">What would the government look like on Mars?</p></div>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                    <div className="embed-responsive embed-responsive-16by9">
+                        <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"></iframe>
                     </div>
                 </div>
                 <div className="row">

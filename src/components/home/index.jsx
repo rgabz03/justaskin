@@ -31,7 +31,7 @@ export default class HomeIndex extends Component {
         
         return (
             <React.Fragment>
-            <div className="col-md-6 col-sm-12">
+            <div className="col-md-12 col-sm-12">
                 <TimelineProfileList/>
                 <br/>
                 <TimeLineQuestion/>
