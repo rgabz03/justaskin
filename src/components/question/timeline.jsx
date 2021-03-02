@@ -33,7 +33,7 @@ export default class LoginIndex extends Component {
         return (
             <div className="">
                 <br/>
-                <div className="row border-top border-bottom">
+                <div className="row custom-box-shadow border-bottom">
                    <TimelinePostTopIndicator/>
                 </div>
                 <br/>

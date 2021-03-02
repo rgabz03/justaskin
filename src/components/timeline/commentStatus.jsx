@@ -6,7 +6,7 @@ export default class comments extends Component {
         return ( 
             <div className="row">
                 <div className="container">
-                    <span className="sm-font-size">See all 73 comments</span>
+                    <span className="sm-font-size text-muted">See all 73 comments</span>
                 </div>
             </div>
         );

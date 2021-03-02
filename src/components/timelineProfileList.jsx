@@ -5,7 +5,7 @@ export default class timelineProfileList extends Component {
     render() { 
         return ( 
             <div className="fixed-top bg-white">
-                <div className="container-fluid border-top p-3">
+                <div className="container-fluid border-top padding-top-15">
                         <div className="row text-center border-bottom shadow-sm">
                             <div className="col-4 mb-4 border-right">
                                 <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
