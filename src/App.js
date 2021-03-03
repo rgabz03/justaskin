@@ -4,6 +4,8 @@ import Footer from "./components/footer";
 import LoginIndex from "./components/login/index";
 import SignupIndex from "./components/signup/index";
 import HomeIndex from "./components/home/index";
+import MessageIndex from "./components/message/index";
+import SearchList from "./components/profile/search/list";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 
@@ -71,7 +73,7 @@ const Message = () => {
 
   return (
       <React.Fragment>
-          <h1>Message</h1>
+          <MessageIndex/>
           <Footer/>
       </React.Fragment>
   );
@@ -83,7 +85,7 @@ const Search = () => {
 
   return (
       <React.Fragment>
-          <h1>Search</h1>
+          <SearchList/>
           <Footer/>
       </React.Fragment>
   );

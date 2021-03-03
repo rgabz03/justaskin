@@ -87,7 +87,7 @@ img.avatar {
 
 .timeline-profile-list {
   display: block;
-  max-width: 100%;
+  max-width: 85%;
   height: auto;
 }
 
@@ -100,11 +100,11 @@ img.avatar {
 }
 
 .timeline-top-blank-space {
-  height : 20vh;
+  height : 21vh;
 }
 
 .timeline-bottom-space {
-  height: 20vh;
+  height: 21vh;
 }
 
 .sm-font-size {
@@ -145,6 +145,10 @@ img.avatar {
 }
 
 
+.padding-top-10 {
+  padding-top: 10px;
+}
+
 .padding-top-15 {
   padding-top: 15px;
 }
@@ -155,3 +159,46 @@ img.avatar {
   height: auto;
   box-shadow: inset 0px 11px 8px -10px #ccc, inset 0px 0px 0px 0px #CCC;
 }
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.search-input-container {
+  margin: 25px auto;
+}
+
+.message-list a:hover {
+  /* background-color: red; */
+}
+
+.custom-active {
+  background-color: #0be7a4;
+  border-color: #0be7a4;
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* For Testoing */
