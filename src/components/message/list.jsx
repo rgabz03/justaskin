@@ -41,7 +41,7 @@ export default class List extends Component {
                                 <small>3 days ago</small>
                             </div>
                             <p className="mb-1">This is the content of the user message...</p>
-                            <span class="badge badge-danger badge-pill position-relative float-right">14</span>
+                            <span className="badge badge-danger badge-pill position-relative float-right">14</span>
                         </div>
                     </div>
                 </a>

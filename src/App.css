@@ -190,6 +190,10 @@ img.avatar {
   color: white;
 }
 
+.search-image-width {
+  max-width: 540px;
+}
+
 
 
 

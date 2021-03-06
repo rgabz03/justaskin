@@ -28,24 +28,83 @@ export default class List extends Component {
     render() { 
         
         return (
-            <div className="col-md-12 col-sm-12 search-input-container">
-                 <div className="form-group has-search">
-                    <span className="fa fa-search form-control-feedback"></span>
-                    <input type="text" className="form-control" placeholder="Search"/>
-                </div>
-                <div className="row">
-                    <div className="container">
-                        <div class="card">
-                            <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image"/>
-                            <div class="card-body">
-                                <h4 class="card-title">John Doe</h4>
-                                <p class="card-text">Some example text.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
+                <div className="col-md-12 col-sm-12 search-input-container">
+                    <div className="form-group has-search">
+                        <span className="fa fa-search form-control-feedback"></span>
+                        <input type="text" className="form-control" placeholder="Search"/>
+                    </div>
+                    <div className="contianer">
+                        
+                        <div className="row border-bottom shadow-sm p-2 bg-white">
+                            <div className="col-4">
+                                <img className="timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg"
+                                    data-holder-rendered="true"/>
+                            </div>
+                            <div className="col-8">
+                                <div className="d-flex w-100 justify-content-between">
+                                    <h5 className="mb-1">User Name</h5>
+                                    <small>Followers 13</small>
+                                </div>
+                                <p className="mb-1"><span class="badge badge-secondary">Website Developer</span></p>
+
+                                <div className="d-flex justify-content-between bd-highlight float-right">
+                                    <div className="d-flex justify-content-start mb-2">
+                                        <div className="p-1 bd-highlight"><i className="fa fa-comment-o"></i></div>
+                                        <div className="p-1 bd-highlight"><i className="fa fa-heart-o"></i></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+
+                        
+                        <div className="row border-bottom shadow-sm p-2 bg-white">
+                            <div className="col-4">
+                                <img className="timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg"
+                                    data-holder-rendered="true"/>
+                            </div>
+                            <div className="col-8">
+                                <div className="d-flex w-100 justify-content-between">
+                                    <h5 className="mb-1">User Name</h5>
+                                    <small>Followers 13</small>
+                                </div>
+                                <p className="mb-1"><span class="badge badge-secondary">Website Developer</span></p>
+
+                                <div className="d-flex justify-content-between bd-highlight float-right">
+                                    <div className="d-flex justify-content-start mb-2">
+                                        <div className="p-1 bd-highlight"><i className="fa fa-comment-o"></i></div>
+                                        <div className="p-1 bd-highlight"><i className="fa fa-heart-o"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* <div class="col">
+                            <div class="card">
+                                <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" class="card-img-top" alt="..."/>
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" class="card-img-top" alt="..."/>
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" class="card-img-top" alt="..."/>
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                </div>
+                            </div>
+                        </div> */}
+                        
                     </div>
                 </div>
-            </div>
         );
     }
 
