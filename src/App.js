@@ -6,6 +6,7 @@ import SignupIndex from "./components/signup/index";
 import HomeIndex from "./components/home/index";
 import MessageIndex from "./components/message/index";
 import SearchList from "./components/profile/search/list";
+import ProfileIndex from "./components/profile/index";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 
@@ -62,7 +63,8 @@ const Profile = () => {
 
   return (
       <React.Fragment>
-          <h1>Profile</h1>
+          <ProfileIndex/>
+          <div className="timeline-bottom-space"></div>
           <Footer/>
       </React.Fragment>
   );
@@ -74,6 +76,7 @@ const Message = () => {
   return (
       <React.Fragment>
           <MessageIndex/>
+          <div className="timeline-bottom-space"></div>
           <Footer/>
       </React.Fragment>
   );
@@ -86,6 +89,7 @@ const Search = () => {
   return (
       <React.Fragment>
           <SearchList/>
+          <div className="timeline-bottom-space"></div>
           <Footer/>
       </React.Fragment>
   );

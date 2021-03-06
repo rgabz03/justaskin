@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import ProfileSearchList  from "./listItem";
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/login', {
@@ -35,27 +36,8 @@ export default class List extends Component {
                     </div>
 
 
-
-
-                    
-
-
-                    <div className="justify-content-center">
-                            <div className="card p-3">
-                                <div className="d-flex align-items-center">
-                                    <div className="image"> <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" className="rounded" width="155"/> </div>
-                                    <div className="ml-3 w-100">
-                                        <h5 className="mb-0 mt-0">Alex Morrision</h5> <span>Senior Journalist</span>
-                                        <div className="p-2 mt-2 bg-primary-custom d-flex justify-content-between rounded text-white stats">
-                                            <div className="d-flex flex-column"> <span className="articles">Post</span> <span className="number1">38</span> </div>
-                                            <div className="d-flex flex-column"> <span className="followers">Followers</span> <span className="number2">980</span> </div>
-                                        </div>
-                                        <div className="button mt-2 d-flex flex-row align-items-center"> <button className="btn btn-sm btn-outline-primary-custom w-100"><i className="fa fa-comment-o"></i></button> <button className="btn btn-sm btn-primary-custom w-100 ml-2">Follow</button> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                    <ProfileSearchList/>
+                    <ProfileSearchList/>                        
 
                         
                     <div className="contianer">
