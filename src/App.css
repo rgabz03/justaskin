@@ -194,6 +194,27 @@ img.avatar {
   max-width: 540px;
 }
 
+.bg-primary-custom {
+  background-color: #0be7a4;
+  border-color: #0be7a4;
+  color: white;
+}
+
+
+
+.btn-primary-custom {
+  background-color: #0be7a4;
+  border-color: #0be7a4;
+  color: white;
+}
+
+.btn-outline-primary-custom {
+    color: #0be7a4;
+    background-color: transparent;
+    background-image: none;
+    border-color: #0be7a4;
+}
+
 
 
 
