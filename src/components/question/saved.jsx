@@ -15,7 +15,7 @@ async function loginUser(credentials) {
         .then(data => data.json())
 }
 
-export default class Questions extends Component {
+export default class Saved extends Component {
 
     handleSubmit = async (event) => {
         const username = event.target.email.value;
@@ -31,12 +31,7 @@ export default class Questions extends Component {
     render() { 
         
         return (
-            <div className="">
-                <br/>
-                <div className="row custom-box-shadow border-bottom">
-                   <TimelinePostTopIndicator/>
-                </div>
-                <br/>
+            <div className="shadow p-3 mb-5 bg-white">
                 <div className="row text-center">
                     <div className="col-12"><h5>Question: </h5></div>
                     <div className="col-12"><p className="sm-font-size">What would the government look like on Mars?</p></div>

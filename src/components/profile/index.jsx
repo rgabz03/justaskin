@@ -1,6 +1,9 @@
 import React, { Component, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import AboutTab from "./tabs/about";
+import SettingsTab from "./tabs/settings";
+import SavedTab from "./tabs/saved";
 
 // let { Tab, Tabs } = ReactBootstrap;
 
@@ -34,17 +37,32 @@ export default class ProfileIndex extends Component {
         return (
                 <div className="col-md-12 col-sm-12">
                     <div className="row">
+                        {/* <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="" className="img-responsive thumbnails"/> */}
+                    
+                        <div className="card text-center col-md-6">
+                            <center>
+                                <div className="col-5">
+                                    <br/>
+                                    <img className="card-img-top img-thumbnail rounded-circle" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="Card image cap"/>
+                                </div>
+                            </center>
+                            <div className="card-body">
+                                <h5 className="card-title">User Name</h5>
+                                <p className="card-text">Senior Developer</p>
+                                <a href="#" className="btn btn-primary-custom">Followers 169</a>
+                            </div>
+                        </div>
 
                     </div>
                     <Tabs defaultActiveKey="about" id="uncontrolled-tab-example">
                         <Tab eventKey="about" title="About">
-                            <h1>About</h1>
+                            <AboutTab/>
                         </Tab>
                         <Tab eventKey="settings" title="Settings">
-                            <h1>Settings</h1>
+                            <SettingsTab/>
                         </Tab>
                         <Tab eventKey="saved" title="Saved">
-                            <h1>Saved</h1>
+                            <SavedTab/>
                         </Tab>
                     </Tabs>
                 </div>
