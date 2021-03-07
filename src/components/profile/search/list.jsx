@@ -30,9 +30,11 @@ export default class List extends Component {
         
         return (
                 <div className="col-md-12 col-sm-12 search-input-container">
-                    <div className="form-group has-search">
-                        <span className="fa fa-search form-control-feedback"></span>
-                        <input type="text" className="form-control" placeholder="Search"/>
+                    <div id="search-container">
+                        <div className="form-group has-search">
+                            <span className="fa fa-search form-control-feedback"></span>
+                            <input type="text" className="form-control" placeholder="Search"/>
+                        </div>
                     </div>
 
 

@@ -1,4 +1,3 @@
-$('#myTab a').on('click', function (e) {
-    e.preventDefault()
-    $(this).tab('show')
-})
+function myFunction(){
+    console.log("here");
+}

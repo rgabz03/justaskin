@@ -1,11 +1,9 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useLayoutEffect, useCallback } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 import AboutTab from "./tabs/about";
 import SettingsTab from "./tabs/settings";
 import SavedTab from "./tabs/saved";
-
-// let { Tab, Tabs } = ReactBootstrap;
 
 
 async function loginUser(credentials) {
@@ -19,8 +17,10 @@ async function loginUser(credentials) {
         .then(data => data.json())
 }
 
+
+
 export default class ProfileIndex extends Component {
-    
+
     handleSubmit = async (event) => {
         const username = event.target.email.value;
         const password = event.target.password.value;
@@ -31,41 +31,39 @@ export default class ProfileIndex extends Component {
         });
         // setToken(token);
     }
-    
+
     render() { 
         
         return (
-                <div className="col-md-12 col-sm-12">
-                    <div className="row">
-                        {/* <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="" className="img-responsive thumbnails"/> */}
-                    
-                        <div className="card text-center col-md-6">
-                            <center>
-                                <div className="col-5">
-                                    <br/>
-                                    <img className="card-img-top img-thumbnail rounded-circle" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="Card image cap"/>
-                                </div>
-                            </center>
-                            <div className="card-body">
-                                <h5 className="card-title">User Name</h5>
-                                <p className="card-text">Senior Developer</p>
-                                <a href="#" className="btn btn-primary-custom">Followers 169</a>
-                            </div>
-                        </div>
+                <div className="">
+                                    <div className="row">
+                                            <div className="card text-center col-md-6">
+                                                <center>
+                                                    <div className="col-5">
+                                                        <br/>
+                                                        <img className="card-img-top img-thumbnail rounded-circle" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="Card image cap"/>
+                                                    </div>
+                                                </center>
+                                                <div className="card-body">
+                                                    <h5 className="card-title">User Name</h5>
+                                                    <p className="card-text">Senior Developer</p>
+                                                    <a href="#" className="btn btn-primary-custom">Followers 169</a>
+                                                </div>
+                                            </div>
 
-                    </div>
-                    <Tabs defaultActiveKey="about" id="uncontrolled-tab-example">
-                        <Tab eventKey="about" title="About">
-                            <AboutTab/>
-                        </Tab>
-                        <Tab eventKey="settings" title="Settings">
-                            <SettingsTab/>
-                        </Tab>
-                        <Tab eventKey="saved" title="Saved">
-                            <SavedTab/>
-                        </Tab>
-                    </Tabs>
-                </div>
+                                        </div>
+                                        <Tabs defaultActiveKey="about" id="uncontrolled-tab-example">
+                                            <Tab eventKey="about" title="About">
+                                                <AboutTab/>
+                                            </Tab>
+                                            <Tab eventKey="settings" title="Settings">
+                                                <SettingsTab/>
+                                            </Tab>
+                                            <Tab eventKey="saved" title="Saved">
+                                                <SavedTab/>
+                                            </Tab>
+                                        </Tabs>
+                                </div>
         );
     }
     

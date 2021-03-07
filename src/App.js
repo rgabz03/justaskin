@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import LoginIndex from "./components/login/index";
@@ -7,10 +7,35 @@ import HomeIndex from "./components/home/index";
 import MessageIndex from "./components/message/index";
 import SearchList from "./components/profile/search/list";
 import ProfileIndex from "./components/profile/index";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link , useLocation} from "react-router-dom";
 import './App.css';
 
+
 function App() {
+
+  const search_box_element = document.getElementById('search-container');
+
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    window.onscroll = () => {
+      setOffset(window.pageYOffset)
+    }
+  }, []);
+  // console.log(window.location.pathname);
+  // console.log(offset); 
+
+
+  if(window.location.pathname == '/search' && offset >= 1)
+  { 
+    search_box_element.className = 'remove-fixed-top';
+  }
+  if(window.location.pathname == '/search' && offset >= 80)
+  {
+    search_box_element.className = "fixed-top-custom";
+  }
+
+
   return (
     
     <Router>
