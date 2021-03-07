@@ -22,19 +22,12 @@ function App() {
       setOffset(window.pageYOffset)
     }
   }, []);
+  
   // console.log(window.location.pathname);
   // console.log(offset); 
 
-
-  if(window.location.pathname == '/search' && offset >= 1)
-  { 
-    search_box_element.className = 'remove-fixed-top';
-  }
-  if(window.location.pathname == '/search' && offset >= 80)
-  {
-    search_box_element.className = "fixed-top-custom";
-  }
-
+  if(window.location.pathname == '/search' && offset >= 1){ search_box_element.className = 'remove-fixed-top'; }
+  if(window.location.pathname == '/search' && offset >= 80){ search_box_element.className = "fixed-top-custom"; }
 
   return (
     

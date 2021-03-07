@@ -31,7 +31,47 @@ export default class ProfileSettingsTab extends Component {
         return (
                 <div className="col-md-12 col-sm-12">
                     <div className="row">
-                        <h1>Settings</h1>
+                        
+                        <div className="col-md-12">
+                            <label>Name</label>
+                            <div className="input-group mb-1">
+                                <input type="text" className="form-control" placeholder="Fullname" aria-label="Fullname" aria-describedby="basic-addon2"/>
+                                <div className="input-group-append">
+                                    <button className="btn btn-primary-custom" type="button">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            <label>Email address</label>
+                            <div className="input-group mb-1">
+                                <input type="text" className="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="basic-addon2"/>
+                                <div className="input-group-append">
+                                    <button className="btn btn-primary-custom" type="button">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            <label>Location</label>
+                            <div className="input-group mb-3">
+                                <input type="text" className="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2"/>
+                                <div className="input-group-append">
+                                    <button className="btn btn-primary-custom" type="button">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col">
+                            <label>Receive Notifications</label>
+                            <div className="input-group mb-3">
+                                
+                                <label className="switch">
+                                <input type="checkbox"/>
+                                <span className="slider round"></span>
+                                </label>
+                                
+            
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
         );

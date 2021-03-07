@@ -29,9 +29,20 @@ export default class ProfileAboutTab extends Component {
     render() { 
         
         return (
-                <div className="col-md-12 col-sm-12">
+                <div className="col-md-12 col-sm-12 text-align-center">
+                    <br/>
                     <div className="row">
-                        <h1>About</h1>
+                        <div className="col-md-12">
+                            <h6 className="text-muted">Edit Description</h6>
+                            <p>This is just an example of Description</p>
+                        </div>
+                        
+                        <div className="col-md-12">
+                            <h6 className="text-muted">Manage your interests</h6>
+                            <span className="badge badge-secondary px-2 m-1">Web development</span>
+                            <span className="badge badge-secondary px-2 m-1">Javascript</span>
+                            <span className="badge badge-secondary px-2 m-1">Photo Editing</span>
+                        </div>
                     </div>
                 </div>
         );
