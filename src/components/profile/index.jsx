@@ -52,7 +52,7 @@ export default class ProfileIndex extends Component {
                                             </div>
 
                                         </div>
-                                        <Tabs defaultActiveKey="about" id="uncontrolled-tab-example">
+                                        <Tabs defaultActiveKey="about" id="uncontrolled-tab-example" fill>
                                             <Tab eventKey="about" title="About">
                                                 <AboutTab/>
                                             </Tab>

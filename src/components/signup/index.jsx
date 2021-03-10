@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default class SignupIndex extends Component {
 
+    
     handleSubmit = (event) => {
         alert('A name was submitted: ');
         event.preventDefault();
@@ -44,8 +45,8 @@ export default class SignupIndex extends Component {
                     <br/>
                     <center>
                         <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-                            <label className="form-check-label" for="flexRadioDefault2">I agree with Private Policy</label>
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                            <label className="form-check-label">I agree with Private Policy</label>
                         </div>
                         <br/>
                         <div>

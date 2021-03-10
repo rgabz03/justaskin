@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Label from "../../../custom/label";
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/login', {
@@ -13,7 +14,24 @@ async function loginUser(credentials) {
         .then(data => data.json())
 }
 
+
 export default class ProfileAboutTab extends Component {
+    
+
+    constructor() {
+        super();
+        this.state = {
+        html: "This is just an example of Description"
+        };
+    }
+    
+    handleChange = (event) => {
+        this.setState({html: event.target.value}, ()=> {  console.log(this.state.html); });
+    };
+
+    TriggerEdit = () => {
+        this.handleChange('test');
+    }
     
     handleSubmit = async (event) => {
         const username = event.target.email.value;
@@ -26,6 +44,8 @@ export default class ProfileAboutTab extends Component {
         // setToken(token);
     }
     
+    
+      
     render() { 
         
         return (
@@ -34,7 +54,7 @@ export default class ProfileAboutTab extends Component {
                     <div className="row">
                         <div className="col-md-12">
                             <h6 className="text-muted">Edit Description</h6>
-                            <p>This is just an example of Description</p>
+                            <Label html={this.state.html} onChange={this.handleChange} />
                         </div>
                         
                         <div className="col-md-12">
