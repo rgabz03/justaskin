@@ -9,8 +9,8 @@ export default class topPostIndicator extends Component {
                     <div className="container">
                         <div className="row padding-top-4">
                             <div className="col-2 padding-bottom-top-2">
-                                <img className="img-thumbnail rounded-circle timeline-question-profile-photo" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
-                                data-holder-rendered="true"/> 
+                                <Link to="/profile/view/123"><img className="img-thumbnail rounded-circle timeline-question-profile-photo" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                                data-holder-rendered="true"/> </Link>
                             </div>
                             <div className="col-4 padding-bottom-top-2">
                                 <div className="row padding-top-4">

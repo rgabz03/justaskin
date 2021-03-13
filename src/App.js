@@ -5,8 +5,10 @@ import LoginIndex from "./components/login/index";
 import SignupIndex from "./components/signup/index";
 import HomeIndex from "./components/home/index";
 import MessageIndex from "./components/message/index";
+import UserMessageView from "./components/message/view";
 import SearchList from "./components/profile/search/list";
 import ProfileIndex from "./components/profile/index";
+import UserProfileView from "./components/profile/view";
 import { BrowserRouter as Router, Route, Link , useLocation} from "react-router-dom";
 import './App.css';
 
@@ -14,6 +16,7 @@ import './App.css';
 function App() {
 
   const search_box_element = document.getElementById('search-container');
+  const footer_menu_element = document.getElementById('footer-menu');
 
   const [offset, setOffset] = useState(0);
 
@@ -28,6 +31,7 @@ function App() {
 
   if(window.location.pathname == '/search' && offset >= 1){ search_box_element.className = 'remove-fixed-top'; }
   if(window.location.pathname == '/search' && offset >= 80){ search_box_element.className = "fixed-top-custom"; }
+  
 
   return (
     
@@ -43,6 +47,8 @@ function App() {
             <Route path="/signup" exact component={Signup} />
             <Route path="/forgotpassword" exact component={ForgotPassword} />
             <Route path="/toc"  component={TOC} />
+            <Route path="/profile/view"  component={ProfileView} />
+            <Route path="/message/view"  component={MessageView} />
         </main>
     </React.Fragment>
     </Router>
@@ -89,6 +95,21 @@ const Profile = () => {
 }
 
 
+
+
+
+const ProfileView = () => {
+
+  return (
+      <React.Fragment>
+          <UserProfileView/>
+          <div className="timeline-bottom-space"></div>
+          <Footer/>
+      </React.Fragment>
+  );
+}
+
+
 const Message = () => {
 
   return (
@@ -100,6 +121,19 @@ const Message = () => {
   );
 }
 
+
+
+
+const MessageView = () => {
+
+  return (
+      <React.Fragment>
+          <UserMessageView/>
+          <div className="timeline-bottom-space"></div>
+          <Footer/>
+      </React.Fragment>
+  );
+}
 
 
 const Search = () => {

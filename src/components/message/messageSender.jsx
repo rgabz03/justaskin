@@ -1,7 +1,5 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import MessageList from "./messageUserList";
-import MessageSender from "./messageSender";
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/login', {
@@ -30,9 +28,17 @@ export default class View extends Component {
     render() { 
         
         return (
-            <div className="col-md-12 col-sm-12">
-                <MessageList/>
-                <MessageSender/>
+            <div className="col-md-12 col-sm-12 fixed-bottom">
+                <div className="row shadow-lg p-3 bg-white">
+                    <div className="container">
+                        <div className="input-group mb-3">
+                            <input type="text" className="form-control" placeholder="Message.." aria-label="Message.." aria-describedby="basic-addon2"/>
+                            <div className="input-group-append">
+                                <button className="btn btn-primary-custom" type="button"><i className="fa fa-send"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
         );

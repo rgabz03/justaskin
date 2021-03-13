@@ -29,7 +29,7 @@ export default class List extends Component {
         
         return (
             <div className="list-group message-list">
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start custom-active">
+                <Link to="/message/view/1" className="list-group-item list-group-item-action flex-column align-items-start custom-active">
                     <div className="row">
                         <div className="col-4">
                             <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
@@ -44,8 +44,8 @@ export default class List extends Component {
                             <span className="badge badge-danger badge-pill position-relative float-right">14</span>
                         </div>
                     </div>
-                </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                </Link>
+                <Link to="/message/view/2" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="row">
                         <div className="col-4">
                             <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg"
@@ -59,8 +59,8 @@ export default class List extends Component {
                             <p className="mb-1">This is the content of the user message...</p>
                         </div>
                     </div>
-                </a>
-                <a href="#" className="list-group-item list-group-item-action flex-column align-items-start">
+                </Link>
+                <Link to="/message/view/1" className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="row">
                         <div className="col-4">
                             <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg"
@@ -74,9 +74,8 @@ export default class List extends Component {
                             <p className="mb-1">This is the content of the user message...</p>
                         </div>
                     </div>
-                </a>
+                </Link>
             </div>
-            
         );
     }
 

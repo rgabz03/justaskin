@@ -1,7 +1,5 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import MessageList from "./messageUserList";
-import MessageSender from "./messageSender";
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/login', {
@@ -31,8 +29,7 @@ export default class View extends Component {
         
         return (
             <div className="col-md-12 col-sm-12">
-                <MessageList/>
-                <MessageSender/>
+                Message List
             </div>
             
         );

@@ -28,6 +28,7 @@ export default class ListItem extends Component {
     render() { 
         
         return (            
+            <Link to="/profile/view/123" className="text-secondary">
                 <div className="justify-content-center">
                     <div className="card p-3">
                         <div className="d-flex align-items-center">
@@ -44,6 +45,7 @@ export default class ListItem extends Component {
                     </div>
                     <br/>
                 </div>
+            </Link>
         );
     }
 

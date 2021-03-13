@@ -1,10 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default class Footer extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+        showFooterMenu: (window.location.pathname.match("message/view")) ? true: false
+        };
+    }
+
     render() { 
+
         return ( 
-            <div className="fixed-bottom bg-white">
+            <div id="footer-menu" className="fixed-bottom bg-white" style={{ display: this.state.showFooterMenu ? "none" : "block" }}>
                 <div className="container-fluid border-top p-3">
                     <center>
                         <div className="d-flex bd-highlight">
