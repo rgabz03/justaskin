@@ -17,7 +17,7 @@ export default class SignupIndex extends Component {
                 <div className="login-form">
 
                     <div className="imgcontainer">
-                        <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="" className="avatar"/>
+                        <img src="/logo.png" alt="" className="m-4" width="320"/>
                     </div>
                     <h3>Sign Up</h3>
                     <h5>Please sign up to ask questions.</h5>

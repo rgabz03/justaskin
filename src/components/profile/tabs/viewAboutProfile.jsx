@@ -54,7 +54,7 @@ export default class ViewProfileAboutTab extends Component {
                     <br/>
                     <div className="row">
                         <div className="col-md-12">
-                            <h6 className="text-muted">Edit Description</h6>
+                            <h6 className="text-muted">Description</h6>
                             <Label html={this.state.html} onChange={this.handleChange} />
                         </div>
                         

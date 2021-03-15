@@ -32,7 +32,7 @@ export default class LoginIndex extends Component {
                 <div className="login-form">
 
                     <div className="imgcontainer">
-                        <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="" className="avatar"/>
+                        <img src="/logo.png" alt="" className="m-4" width="320"/>
                     </div>
                     <h3>Login</h3>
                     <h5>Please login to your account</h5>
