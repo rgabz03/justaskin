@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import TimelinePostTopIndicator from "../timeline/topPostIndicator";
 import CommentStatus from "../timeline/commentStatus";
 import LikeStatus from "../timeline/likesStatus";
+import CommentSender from "../timeline/commentSender";
 
 // async function loginUser(credentials) {
 //     return fetch('http://localhost:8080/login', {
@@ -32,7 +33,15 @@ export default class TimelineQuestionsView extends Component {
         
         return (
             <div className="">
-                <br/>
+                <div className="col-md-12 col-sm-12">
+                    <div className="">
+                        <div className="row shadow-lg p-3 bg-white">
+                            <div className="col-2">
+                                <Link to="/home" className="link-primary"><i className="fa fa-chevron-left fa-2x"></i></Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="row custom-box-shadow border-bottom">
                    <TimelinePostTopIndicator/>
                 </div>
@@ -61,6 +70,7 @@ export default class TimelineQuestionsView extends Component {
                     <LikeStatus/>
                 </div>
                 <CommentStatus/>
+                <CommentSender/>
             </div>
         );
     }

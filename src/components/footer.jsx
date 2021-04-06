@@ -6,7 +6,8 @@ export default class Footer extends Component {
     constructor() {
         super();
         this.state = {
-        showFooterMenu: (window.location.pathname.match("message/view")) ? true: false
+            // showFooterMenu: (window.location.pathname.match("message/view")) ? true: false
+            showFooterMenu: (window.location.pathname.match("questions/view")) ? true: false
         };
     }
 
@@ -19,7 +20,7 @@ export default class Footer extends Component {
                         <div className="d-flex bd-highlight">
                             <div className="p-2 flex-fill bd-highlight"><Link to="/home" className="link-primary"><i className="fa fa-home fa-2x"></i></Link></div>
                             <div className="p-2 flex-fill bd-highlight"><Link to="/search" className="link-primary"><i className="fa fa-search fa-2x"></i></Link></div>
-                            <div className="p-2 flex-fill bd-highlight"><Link to="/session/questions" className="link-primary"><i className="fa fa-send-o fa-2x"></i></Link></div>
+                            <div className="p-2 flex-fill bd-highlight"><Link to="/session/questions" className="link-primary"><i className="fa fa-question-circle-o fa-2x"></i></Link></div>
                             <div className="p-2 flex-fill bd-highlight"><Link to="/profile" className="link-primary"><i className="fa fa-user fa-2x"></i></Link></div>
                         </div>
                     </center>
