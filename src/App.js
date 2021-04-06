@@ -9,6 +9,9 @@ import UserMessageView from "./components/message/view";
 import SearchList from "./components/profile/search/list";
 import ProfileIndex from "./components/profile/index";
 import UserProfileView from "./components/profile/view";
+import QuestionSessionIndex from "./components/question/sessionIndex";
+import UserQuestionView from "./components/question/view";
+import TimelineQuestionViewDetail from "./components/question/timelineQuestionView";
 import { BrowserRouter as Router, Route, Link , useLocation} from "react-router-dom";
 import './App.css';
 
@@ -44,11 +47,14 @@ function App() {
             <Route path="/profile" exact component={Profile} />
             <Route path="/search" exact component={Search} />
             <Route path="/message" exact component={Message} />
+            <Route path="/session/questions" exact component={SessionQuestions} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/forgotpassword" exact component={ForgotPassword} />
             <Route path="/toc"  component={TOC} />
             <Route path="/profile/view"  component={ProfileView} />
             <Route path="/message/view"  component={MessageView} />
+            <Route path="/questions/view"  component={QuestionView} />
+            <Route path="/timeline/questions/view"  component={TimelineQuestionView} />
         </main>
     </React.Fragment>
     </Router>
@@ -124,6 +130,20 @@ const Message = () => {
 
 
 
+const SessionQuestions = () => {
+
+  return (
+      <React.Fragment>
+          <QuestionSessionIndex/>
+          <div className="timeline-bottom-space"></div>
+          <Footer/>
+      </React.Fragment>
+  );
+}
+
+
+
+
 const MessageView = () => {
 
   return (
@@ -135,6 +155,30 @@ const MessageView = () => {
   );
 }
 
+
+
+const QuestionView = () => {
+
+  return (
+      <React.Fragment>
+          <UserQuestionView/>
+          <div className="timeline-bottom-space"></div>
+          <Footer/>
+      </React.Fragment>
+  );
+}
+
+
+const TimelineQuestionView = () => {
+
+  return (
+      <React.Fragment>
+          <TimelineQuestionViewDetail/>
+          <div className="timeline-bottom-space"></div>
+          <Footer/>
+      </React.Fragment>
+  );
+}
 
 const Search = () => {
 
