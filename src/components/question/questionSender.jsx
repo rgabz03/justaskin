@@ -32,7 +32,7 @@ export default class View extends Component {
                 <div className="row shadow-lg p-3 bg-white">
                     <div className="container">
                         <div className="input-group mb-3">
-                            <input type="text" className="form-control" placeholder="Message.." aria-label="Message.." aria-describedby="basic-addon2"/>
+                            <input type="text" className="form-control" placeholder="Type Message.." aria-label="Type Message.." aria-describedby="basic-addon2"/>
                             <div className="input-group-append">
                                 <button className="btn btn-primary-custom" type="button"><i className="fa fa-send"></i></button>
                             </div>
