@@ -4,6 +4,7 @@ import TimelinePostTopIndicator from "../timeline/topPostIndicator";
 import CommentStatus from "../timeline/commentStatus";
 import LikeStatus from "../timeline/likesStatus";
 import CommentSender from "../timeline/commentSender";
+import ViewComments from "../timeline/readCommentPost";
 
 // async function loginUser(credentials) {
 //     return fetch('http://localhost:8080/login', {
@@ -67,9 +68,16 @@ export default class TimelineQuestionsView extends Component {
                             </div>
                         </div>
                     </div>
+                    <div className="container">
                     <LikeStatus/>
+                    </div>
+                   
                 </div>
-                <CommentStatus/>
+                
+                <div className="container">
+                    <CommentStatus/>
+                </div>
+                <ViewComments/>
                 <CommentSender/>
             </div>
         );
