@@ -28,6 +28,8 @@ export default class HomeIndex extends Component {
     }
     
     render() { 
+
+        
         
         return (
             <React.Fragment>

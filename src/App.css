@@ -91,6 +91,12 @@ img.avatar {
   height: auto;
 }
 
+.timeline-profile-list-slider {
+  display: block;
+  max-width: 55%;
+  height: auto;
+}
+
 
 .timeline-question-profile-photo{
   display: block;
@@ -122,6 +128,8 @@ img.avatar {
 .timeline-positing-time {
   font-size: 10px;
 }
+
+
 
 .padding-bottom-top-2 {
   padding-top: 2px;
@@ -328,4 +336,18 @@ input:checked + .slider:before {
 
 
 
-/* For Testoing */
+/* For Testing */
+.items {
+  width: 90%;
+  margin: 0px auto;
+  margin-top: 100px
+}
+
+.slick-slide {
+  margin: 10px
+}
+
+.slick-slide img {
+  width: 100%;
+  border: 0px solid #fff
+}

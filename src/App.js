@@ -14,6 +14,8 @@ import UserQuestionView from "./components/question/view";
 import TimelineQuestionViewDetail from "./components/question/timelineQuestionView";
 import { BrowserRouter as Router, Route, Link , useLocation} from "react-router-dom";
 import './App.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 
 function App() {
