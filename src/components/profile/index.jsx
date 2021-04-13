@@ -3,6 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 import AboutTab from "./tabs/about";
 import SettingsTab from "./tabs/settings";
+import WalletTab from "./tabs/wallet";
 import SavedTab from "./tabs/saved";
 
 
@@ -58,6 +59,9 @@ export default class ProfileIndex extends Component {
                                             </Tab>
                                             <Tab eventKey="settings" title="Settings">
                                                 <SettingsTab/>
+                                            </Tab>
+                                            <Tab eventKey="wallet" title="Wallet">
+                                                <WalletTab/>
                                             </Tab>
                                             <Tab eventKey="saved" title="Saved">
                                                 <SavedTab/>

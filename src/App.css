@@ -240,6 +240,10 @@ img.avatar {
   color: #495057;;
 }
 
+#uncontrolled-tab-example-tab-wallet.active {
+  color: #495057;;
+}
+
 #uncontrolled-tab-example-tab-saved.active {
   color: #495057;;
 }
@@ -251,6 +255,9 @@ img.avatar {
 }
 
 #uncontrolled-tab-example-tab-settings {
+  color: #0be7a4;
+}
+#uncontrolled-tab-example-tab-wallet {
   color: #0be7a4;
 }
 
