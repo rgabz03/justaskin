@@ -40,6 +40,18 @@ export default class SignupIndex extends Component {
                                 </div>
                             </div>
                         </div>
+
+                        <div className="form-group">
+                            <div className="input-group mb-3">
+                                <select class="form-control" aria-label="Default select example">
+                                    <option selected>Select Account Type</option>
+                                    <option value="ordinary">Ordinary</option>
+                                    <option value="expert">Expert</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        
                         <button type="submit" className="btn btn-primary-new btn-md btn-block">Sign up</button>             
                     </form>
                     <br/>
