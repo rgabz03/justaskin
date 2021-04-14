@@ -32,7 +32,8 @@ export default class timelineProfileList extends Component {
             slidesToShow: 2,
             slidesToScroll: 1,
             adaptiveHeight: true,
-            initialSlide: 2
+            initialSlide: 2,
+            width : 120
             
           };
 

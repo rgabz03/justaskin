@@ -41,7 +41,7 @@ export default class SignupIndex extends Component {
                             </div>
                         </div>
 
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <div className="input-group mb-3">
                                 <select class="form-control" aria-label="Default select example">
                                     <option selected>Select Account Type</option>
@@ -49,18 +49,17 @@ export default class SignupIndex extends Component {
                                     <option value="expert">Expert</option>
                                 </select>
                             </div>
+                        </div> */}
+                        <div className="form-group">
+                            <div className="form-check">
+                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                                <label className="form-check-label">I agree with <Link to="privacy" className="link-primary">Privacy Policy</Link></label>
+                            </div>
                         </div>
-
-                        
                         <button type="submit" className="btn btn-primary-new btn-md btn-block">Sign up</button>             
                     </form>
                     <br/>
                     <center>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
-                            <label className="form-check-label">I agree with Private Policy</label>
-                        </div>
-                        <br/>
                         <div>
                             <div className="">or login with</div>
                             <br/>

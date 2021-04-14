@@ -39,7 +39,7 @@ export default class ListItem extends Component {
                                     <div className="d-flex flex-column"> <span className="articles">Post</span> <span className="number1">38</span> </div>
                                     <div className="d-flex flex-column"> <span className="followers">Followers</span> <span className="number2">980</span> </div>
                                 </div>
-                                <div className="button mt-2 d-flex flex-row align-items-center"> <button className="btn btn-sm btn-outline-primary-custom w-100"><i className="fa fa-comment-o"></i></button> <button className="btn btn-sm btn-primary-custom w-100 ml-2">Follow</button> </div>
+                                <div className="button mt-2 d-flex flex-row align-items-center"> <button className="btn btn-sm btn-outline-primary-custom w-100">Ask</button> <button className="btn btn-sm btn-primary-custom w-100 ml-2">Follow</button> </div>
                             </div>
                         </div>
                     </div>

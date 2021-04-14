@@ -53,6 +53,7 @@ function App() {
             <Route path="/signup" exact component={Signup} />
             <Route path="/forgotpassword" exact component={ForgotPassword} />
             <Route path="/toc"  component={TOC} />
+            <Route path="/privacy"  component={PrivacyPolicy} />
             <Route path="/profile/view"  component={ProfileView} />
             <Route path="/message/view"  component={MessageView} />
             <Route path="/questions/view"  component={QuestionView} />
@@ -216,7 +217,38 @@ const TOC = () => {
 
   return (
       <React.Fragment>
+        <div className="col-md-12 col-sm-12">
+            <div className="">
+                <div className="row shadow-lg p-3 bg-white">
+                    <div className="col-2">
+                        <Link to="/" className="link-primary"><i className="fa fa-chevron-left fa-2x"></i></Link>
+                    </div>
+                    <div className="col-10"><span>Terms and Condtions</span></div>
+                </div>
+            </div>
+        </div>
           <h1>Terms and Conditions</h1>
+      </React.Fragment>
+  );
+}
+
+
+
+const PrivacyPolicy = () => {
+
+  return (
+      <React.Fragment>
+        <div className="col-md-12 col-sm-12">
+            <div className="">
+                <div className="row shadow-lg p-3 bg-white">
+                    <div className="col-2">
+                        <Link to="/signup" className="link-primary"><i className="fa fa-chevron-left fa-2x"></i></Link>
+                    </div>
+                    <div className="col-10"><span>Privacy Policy</span></div>
+                </div>
+            </div>
+        </div>
+          <h1>Privacy Policy</h1>
       </React.Fragment>
   );
 }

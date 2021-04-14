@@ -33,50 +33,25 @@ export default class ProfileSettingsTab extends Component {
                     <div className="row">
                         
                         <div className="col-md-12">
-                            <label>Name</label>
+                            <br/>
+                            <center>
+                                <h1><b>82</b></h1>
+                                <span className="sm-font-size text-muted">BALANCE</span>
+                            </center>
+                            <br/>
                             <div className="input-group mb-1">
-                                <input type="text" className="form-control" placeholder="Fullname" aria-label="Fullname" aria-describedby="basic-addon2"/>
+                                <input type="number" className="form-control" placeholder="Input Coins" aria-label="Input Coins" aria-describedby="basic-addon2" required/>
                                 <div className="input-group-append">
-                                    <button className="btn btn-primary-custom" type="button">Edit</button>
+                                    <button className="btn btn-primary-custom" type="button">REQUEST</button>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            <label>Email address</label>
-                            <div className="input-group mb-1">
-                                <input type="text" className="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="basic-addon2"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary-custom" type="button">Edit</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            <label>Location</label>
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary-custom" type="button">Edit</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col">
-                            <label>Receive Notifications</label>
-                            <div className="input-group mb-3">
-                                
-                                <label className="switch">
-                                <input type="checkbox"/>
-                                <span className="slider round"></span>
-                                </label>
-                                
-            
                             </div>
                         </div>
                         
-                        <div className="col-md-12">
+                        {/* <div className="col-md-12">
                             <div className="input-group mb-3">
                                 <Link to="https://www.google.com" className="btn btn-primary-custom">Become a verified Expert</Link>
                             </div>
-                        </div>
+                        </div> */}
                         
                     </div>
                 </div>
