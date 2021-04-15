@@ -14,6 +14,15 @@ async function loginUser(credentials) {
 
 export default class View extends Component {
 
+    
+    constructor(){
+        super()
+        this.state = {
+            animate : true,
+        }
+
+    }
+
     handleSubmit = async (event) => {
         const username = event.target.email.value;
         const password = event.target.password.value;
@@ -31,6 +40,9 @@ export default class View extends Component {
             <div className="col-md-12 col-sm-12 fixed-bottom">
                 <div className="row shadow-lg p-3 bg-white">
                     <div className="container">
+                        <div className="input-group mb-3">
+                            <span className={this.state.animate ? "fade-in-btn btn btn-primary-custom" : "btn-primary-custom"}>Ask Another</span>
+                        </div>
                         <div className="input-group mb-3">
                             <input type="text" className="form-control" placeholder="Type Message.." aria-label="Type Message.." aria-describedby="basic-addon2"/>
                             <div className="input-group-append">

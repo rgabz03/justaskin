@@ -14,6 +14,16 @@ async function loginUser(credentials) {
 
 export default class View extends Component {
 
+    
+    constructor(){
+        super()
+        this.state = {
+            animate : true,
+        }
+
+    }
+
+
     handleSubmit = async (event) => {
         const username = event.target.email.value;
         const password = event.target.password.value;

@@ -42,8 +42,8 @@ export default class View extends Component {
                                         <img className="img-thumbnail rounded-circle timeline-question-profile-photo float-left" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                     data-holder-rendered="true"/>
                                     </div>
-                                    <div className="col-8 float-right">
-                                        <span className="text-muted">Active 5 minutes ago</span>
+                                    <div className="col-10 float-right">
+                                        <span className="text-muted">Active 5 minutes ago</span> <Link to="#"><i className="fa fa-exclamation-circle float-right text-danger"></i></Link>
                                         <div>User name</div>
                                     </div>
                                 </div>  

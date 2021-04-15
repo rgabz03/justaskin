@@ -358,3 +358,15 @@ input:checked + .slider:before {
   width: 100%;
   border: 0px solid #fff
 }
+
+
+
+.fade-in-btn {
+	animation: fade 0.9s ease-in;
+}
+
+@keyframes fade {
+	0% {
+		opacity : 0;
+	}
+}
