@@ -43,7 +43,7 @@ export default class View extends Component {
                                     data-holder-rendered="true"/>
                                     </div>
                                     <div className="col-10 float-right">
-                                        <span className="text-muted">Active 5 minutes ago</span> <Link to="#"><i className="fa fa-exclamation-circle float-right text-danger"></i></Link>
+                                        <span className="text-muted">Active 5 minutes ago</span> <Link to="#" className="float-right"><span className="sm-font-size text-danger"><i className="fa fa-exclamation-circle"></i></span></Link>
                                         <div>User name</div>
                                     </div>
                                 </div>  
