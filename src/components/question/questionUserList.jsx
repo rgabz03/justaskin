@@ -39,23 +39,23 @@ export default class View extends Component {
                     </div>
                 </div>
 
-                <div className="card bg-primary-custom shadow mb-5 text-white rounded">
+                <div className="card bg-primary-custom shadow mb-5 text-white rounded col-10 float-right">
                     <div className="card-body">
                         <div className="card-title sm-font-size float-right"><i className="fa fa-clock-o"></i> 5 minutes ago</div>
                         <br/>
-                        <p className="card-text">Your message here</p>
+                        <p className="card-text float-left">Your message here</p>
                     </div>
                 </div>
 
-                <div className="card bg-white shadow mb-5 rounded">
+                <div className="card bg-white shadow mb-5 rounded col-10 float-left">
                     <div className="card-body">
                         <div className="card-title sm-font-size float-left"><i className="fa fa-clock-o"></i> 5 minutes ago</div>
                         <br/>
-                        <p className="card-text">Response of the expert</p>
+                        <p className="card-text float-left">Response of the expert</p>
                     </div>
                 </div>
 
-                
+                <div className="ask-user-question-bottom-space"></div>
 
             </div>
             

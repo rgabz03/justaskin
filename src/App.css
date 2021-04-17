@@ -121,6 +121,12 @@ img.avatar {
   height: 21vh;
 }
 
+
+.ask-user-question-bottom-space {
+  height: 50vh;
+}
+
+
 .sm-font-size {
   font-size: 13px;
 }
@@ -370,3 +376,4 @@ input:checked + .slider:before {
 		opacity : 0;
 	}
 }
+
