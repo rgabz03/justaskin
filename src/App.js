@@ -11,6 +11,7 @@ import ProfileIndex from "./components/profile/index";
 import UserProfileView from "./components/profile/view";
 import QuestionSessionIndex from "./components/question/sessionIndex";
 import UserQuestionView from "./components/question/view";
+import AskUserHelp from "./components/help/askUser";
 import TimelineQuestionViewDetail from "./components/question/timelineQuestionView";
 import { BrowserRouter as Router, Route, Link , useLocation} from "react-router-dom";
 import './App.css';
@@ -58,6 +59,7 @@ function App() {
             <Route path="/message/view"  component={MessageView} />
             <Route path="/questions/view"  component={QuestionView} />
             <Route path="/timeline/questions/view"  component={TimelineQuestionView} />
+            <Route path="/ask/user"  component={AskUserForHelp} />
         </main>
     </React.Fragment>
     </Router>
@@ -177,6 +179,19 @@ const TimelineQuestionView = () => {
   return (
       <React.Fragment>
           <TimelineQuestionViewDetail/>
+          <div className="timeline-bottom-space"></div>
+          <Footer/>
+      </React.Fragment>
+  );
+}
+
+
+
+const AskUserForHelp = () => {
+
+  return (
+      <React.Fragment>
+          <AskUserHelp/>
           <div className="timeline-bottom-space"></div>
           <Footer/>
       </React.Fragment>

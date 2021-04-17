@@ -11,7 +11,7 @@ export default class readCommentPost extends Component {
                             <div className="col-xs-2 col-md-1">
                                 <img src="http://placehold.it/80" className="img-thumbnail rounded-circle timeline-question-profile-photo-comment p-1" alt="" />
                                 <span className="p-1">
-                                <Link to="#" className="btn btn-primary-custom">Ask Help</Link>
+                                <Link to="/ask/user/12" className="btn btn-primary-custom">Ask Help</Link>
                                 </span>
                                 <span className="float-right sm-font-size text-muted">5 minutes ago</span>
                             </div>
