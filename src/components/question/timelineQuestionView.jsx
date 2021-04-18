@@ -75,7 +75,12 @@ export default class TimelineQuestionsView extends Component {
                 </div>
                 
                 <div className="container">
-                    <CommentStatus/>
+                    {/* <CommentStatus/> */}
+                    <div className="row">
+                        <div className="container">
+                            <Link to="timeline/questions/view/1"><span className="sm-font-size text-muted">73 comments</span></Link>
+                        </div>
+                    </div>
                 </div>
                 <ViewComments/>
                 <CommentSender/>
