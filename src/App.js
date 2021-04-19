@@ -18,7 +18,6 @@ import './App.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-
 function App() {
 
   const search_box_element = document.getElementById('search-container');
@@ -26,18 +25,20 @@ function App() {
 
   const [offset, setOffset] = useState(0);
 
+  
   useEffect(() => {
     window.onscroll = () => {
       setOffset(window.pageYOffset)
     }
   }, []);
+
   
   // console.log(window.location.pathname);
   // console.log(offset); 
 
   if(window.location.pathname == '/search' && offset >= 1){ search_box_element.className = 'remove-fixed-top'; }
   if(window.location.pathname == '/search' && offset >= 80){ search_box_element.className = "fixed-top-custom"; }
-  
+
 
   return (
     

@@ -2,19 +2,26 @@ import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import TimelineProfileList from "../timelineProfileList";
 import TimeLineQuestion from "../question/timeline";
+import config from '../../Config';
+import axios from "axios";
 
-async function loginUser(credentials) {
-    return fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-        .then(data => data.json())
+async function loginUser(username, password) {
+    
+    // return axios
+    //   .post( config.API_URL+ "signin", {
+    //     username,
+    //     password
+    //   })
+    //   .then(response => {
+    //     if (response.data.accessToken) {
+    //       localStorage.setItem("user", JSON.stringify(response.data));
+    //     }
+
+    //     return response.data;
+    //   });
 }
 
-export default class HomeIndex extends Component {
+export default class HomeIndex extends Component{
 
     handleSubmit = async (event) => {
         const username = event.target.email.value;
@@ -43,6 +50,7 @@ export default class HomeIndex extends Component {
             </React.Fragment>
         );
     }
+    
 
 }
  
