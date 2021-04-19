@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { login, logout, getCurrentUser } from '../../custom/userFunctions';
+import { Button,Spinner } from 'react-bootstrap';
 
 export default class LoginIndex extends Component {
 
@@ -45,6 +46,16 @@ export default class LoginIndex extends Component {
                                 </div>
                             </div>
                         </div>
+                        <Button variant="btn btn-primary-new btn-md btn-block" disabled>
+                            <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            />
+                            <span className="">Logging in...</span>
+                        </Button>
                         <button type="submit" className="btn btn-primary-new btn-md btn-block">Login</button>             
                         {/* <Link to="/home"  className="btn btn-primary-new btn-md btn-block">Login</Link> */}
                     </form>
