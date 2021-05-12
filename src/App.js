@@ -13,10 +13,12 @@ import QuestionSessionIndex from "./components/question/sessionIndex";
 import UserQuestionView from "./components/question/view";
 import AskUserHelp from "./components/help/askUser";
 import TimelineQuestionViewDetail from "./components/question/timelineQuestionView";
-import { BrowserRouter as Router, Route, Link , useLocation} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link , useLocation, Redirect} from "react-router-dom";
 import './App.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { login, logout, getCurrentUser } from './custom/userFunctions';
+
 
 function App() {
 
@@ -41,7 +43,6 @@ function App() {
 
 
   return (
-    
     <Router>
     <React.Fragment>
         {/* <Navbar/> */}
@@ -83,6 +84,10 @@ const Login = () => {
 
 const Home = () => {
 
+  if(getCurrentUser() == null){
+    return Login();
+  }
+
   return (
       <React.Fragment>
           <div className="timeline-top-blank-space"></div>
@@ -96,6 +101,10 @@ const Home = () => {
 
 
 const Profile = () => {
+  
+  if(getCurrentUser() == null){
+    return Login();
+  }
 
   return (
       <React.Fragment>
@@ -111,6 +120,11 @@ const Profile = () => {
 
 
 const ProfileView = () => {
+  
+  if(getCurrentUser() == null){
+    return Login();
+  }
+
 
   return (
       <React.Fragment>
@@ -123,6 +137,10 @@ const ProfileView = () => {
 
 
 const Message = () => {
+
+  if(getCurrentUser() == null){
+    return Login();
+  }
 
   return (
       <React.Fragment>
@@ -138,6 +156,10 @@ const Message = () => {
 
 const SessionQuestions = () => {
 
+  if(getCurrentUser() == null){
+    return Login();
+  }
+
   return (
       <React.Fragment>
           <QuestionSessionIndex/>
@@ -152,6 +174,10 @@ const SessionQuestions = () => {
 
 const MessageView = () => {
 
+  if(getCurrentUser() == null){
+    return Login();
+  }
+
   return (
       <React.Fragment>
           <UserMessageView/>
@@ -165,6 +191,10 @@ const MessageView = () => {
 
 const QuestionView = () => {
 
+  if(getCurrentUser() == null){
+    return Login();
+  }
+
   return (
       <React.Fragment>
           <UserQuestionView/>
@@ -176,6 +206,10 @@ const QuestionView = () => {
 
 
 const TimelineQuestionView = () => {
+
+  if(getCurrentUser() == null){
+    return Login();
+  }
 
   return (
       <React.Fragment>
@@ -190,6 +224,10 @@ const TimelineQuestionView = () => {
 
 const AskUserForHelp = () => {
 
+  if(getCurrentUser() == null){
+    return Login();
+  }
+
   return (
       <React.Fragment>
           <AskUserHelp/>
@@ -200,6 +238,10 @@ const AskUserForHelp = () => {
 }
 
 const Search = () => {
+
+  if(getCurrentUser() == null){
+    return Login();
+  }
 
   return (
       <React.Fragment>
@@ -267,6 +309,7 @@ const PrivacyPolicy = () => {
           <h1>Privacy Policy</h1>
       </React.Fragment>
   );
+
 }
 
 export default App;

@@ -1,13 +1,72 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import axios from "axios";
+
+let axiosConfig = {
+    headers: {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    },
+  };
+
 
 export default class SignupIndex extends Component {
 
+    constructor(props) {
+    super(props);
+        this.state = {
+            loginClicked : false
+        }
+    }
     
     handleSubmit = (event) => {
-        alert('A name was submitted: ');
+
         event.preventDefault();
-        console.log(event.target.email.value);
+
+        this.setState({
+            loginClicked: true
+        });
+        var username = event.target.email.value;
+        var password = event.target.password.value;
+
+        var data = axios
+        .post("/users/register", {
+            username,
+            password
+        }, axiosConfig)
+        .then(response => {
+            window.alert('Account Successfully Registered, Redirecting to Login Page');
+            window.location = '/';
+        })
+        .catch(error => {
+            console.log(error.response);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(error.response.data);
+                console.log(error.response.status);
+                // console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+
+            this.setState({
+                loginClicked: false
+            });  
+
+            window.alert("Something went wrong!");
+
+        });
+        
+        
+        return false;
     }
     
     render() { 

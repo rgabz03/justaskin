@@ -11,12 +11,19 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.0",
     "axios": "^0.21.1",
+    "axios-auth-refresh": "^3.1.0",
     "bootstrap": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "react": "^17.0.1",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.0",
     "react-bootstrap": "^1.5.1",
     "react-bottom-scroll-listener": "^5.0.0",
     "react-dom": "^17.0.1",
+    "react-popup": "^0.10.0",
+    "react-popup-alert": "^2.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "react-scroll": "^1.8.1",
@@ -49,6 +56,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-edit-text": "^4.0.0"
-  }
+    "@types/react-edit-text": "^4.0.0",
+    "http-proxy-middleware": "^0.19.1"
+  },
+  "proxy": "http://127.0.0.1:8000/api/v1/"
 }

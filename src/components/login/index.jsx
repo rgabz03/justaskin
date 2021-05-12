@@ -1,23 +1,103 @@
 import React, { Component, useState } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link , Redirect} from "react-router-dom";
 import { login, logout, getCurrentUser } from '../../custom/userFunctions';
 import { Button,Spinner } from 'react-bootstrap';
+import axios from "axios";
 
+let axiosConfig = {
+    headers: {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    },
+  };
+  
 export default class LoginIndex extends Component {
+
+    constructor(props) {
+    super(props);
+        this.state = {
+            loginClicked : false
+        }
+    }
 
     handleSubmit = async (event) => {
 
         event.preventDefault();
+
+        this.setState({
+            loginClicked: true
+        });
         var username = event.target.email.value;
         var password = event.target.password.value;
 
-        login(username, password);
+        // var data = login(username, password);
+      
+        axios
+        .post("/auth/users", {
+            username,
+            password
+        }, axiosConfig)
+        .then(response => {
+            if (response.data.data.access_token) {
+            localStorage.setItem("user", JSON.stringify(response.data.data));
+            }
+            window.location = 'home';
+        })
+        .catch(error => {
+            console.log(error.response);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(error.response.data);
+                console.log(error.response.status);
+                // console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+
+            this.setState({
+                loginClicked: false
+            });  
+            window.alert('Incorrect User Credential');
+
+        });
+        
         
         return false;
     }
     
     render() { 
         console.log(getCurrentUser());
+        if(getCurrentUser()){
+            return <Redirect to='/home' />
+        }
+        const clickedLogin = this.state.loginClicked;
+        let button;
+        if(clickedLogin)
+        {
+            console.log('click');
+            button = <Button variant="btn btn-primary-new btn-md btn-block" disabled>
+                        <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        />
+                        <span className="">Logging in...</span>
+                    </Button>;
+        }else{
+            console.log('not click');
+            button = <button type="submit" className="btn btn-primary-new btn-md btn-block">Login</button>;
+        }
+
         return (
             <div className="col-md-12 col-sm-12">
                 <div className="login-form">
@@ -46,17 +126,7 @@ export default class LoginIndex extends Component {
                                 </div>
                             </div>
                         </div>
-                        <Button variant="btn btn-primary-new btn-md btn-block" disabled>
-                            <Spinner
-                            as="span"
-                            animation="grow"
-                            size="sm"
-                            role="status"
-                            aria-hidden="true"
-                            />
-                            <span className="">Logging in...</span>
-                        </Button>
-                        <button type="submit" className="btn btn-primary-new btn-md btn-block">Login</button>             
+                        {button}
                         {/* <Link to="/home"  className="btn btn-primary-new btn-md btn-block">Login</Link> */}
                     </form>
                     <br/>
