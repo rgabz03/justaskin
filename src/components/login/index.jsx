@@ -39,7 +39,7 @@ export default class LoginIndex extends Component {
             password
         }, axiosConfig)
         .then(response => {
-            if (response.data.data.access_token) {
+            if (response.data.data.access.access_token) {
             localStorage.setItem("user", JSON.stringify(response.data.data));
             }
             window.location = 'home';

@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Button,Spinner } from 'react-bootstrap';
 import axios from "axios";
 
 let axiosConfig = {
@@ -17,18 +18,38 @@ export default class SignupIndex extends Component {
     super(props);
         this.state = {
             loginClicked : false
-        }
+        };
     }
-    
+
     handleSubmit = (event) => {
 
         event.preventDefault();
-
+        
         this.setState({
             loginClicked: true
         });
-        var username = event.target.email.value;
-        var password = event.target.password.value;
+        var username            = event.target.email.value;
+        var password            = event.target.password.value;
+        var confirm_password    = event.target.confirm_password.value;
+        var agree               = event.target.agree.checked;
+
+        if(agree == false){
+            window.alert('Click to Agree');
+            this.setState({
+                loginClicked: false
+            });  
+
+            return false;
+        }
+
+        if(password != confirm_password){
+            window.alert('Password not match');
+            this.setState({
+                loginClicked: false
+            });  
+
+            return false;
+        }
 
         var data = axios
         .post("/users/register", {
@@ -71,6 +92,26 @@ export default class SignupIndex extends Component {
     
     render() { 
         
+        const clickedLogin = this.state.loginClicked;
+        let button;
+        if(clickedLogin)
+        {
+            console.log('click');
+            button = <Button variant="btn btn-primary-new btn-md btn-block" disabled>
+                        <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                        />
+                        <span className="">Signing up...</span>
+                    </Button>;
+        }else{
+            console.log('not click');
+            button = <button type="submit" className="btn btn-primary-new btn-md btn-block">Sign up</button>;
+        }
+
         return (
             <div className="col-md-6 col-sm-12">
                 <div className="login-form">
@@ -100,6 +141,16 @@ export default class SignupIndex extends Component {
                             </div>
                         </div>
 
+                        
+                        <div className="form-group">
+                            <div className="input-group mb-3">
+                                <input type="password" className="form-control" placeholder="Confirm Password" aria-label="User Password" aria-describedby="basic-addon2" name="confirm_password" required/>
+                                <div className="input-group-append">
+                                    <button className="btn btn-outline-secondary" type="button"><i className="fa fa-lock"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* <div className="form-group">
                             <div className="input-group mb-3">
                                 <select class="form-control" aria-label="Default select example">
@@ -111,11 +162,13 @@ export default class SignupIndex extends Component {
                         </div> */}
                         <div className="form-group">
                             <div className="form-check">
-                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                                <input className="form-check-input" type="checkbox" name="agree" id="agreeCheckBox"/>
+                                {/* <input className="form-check-input" type="radio" name="agree" id="flexRadioDefault2"/> */}
                                 <label className="form-check-label">I agree with <Link to="privacy" className="link-primary">Privacy Policy</Link></label>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary-new btn-md btn-block">Sign up</button>             
+                        {button}
+                        {/* <button type="submit" className="btn btn-primary-new btn-md btn-block">Sign up</button>              */}
                     </form>
                     <br/>
                     <center>

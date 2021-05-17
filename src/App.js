@@ -27,6 +27,7 @@ function App() {
 
   const [offset, setOffset] = useState(0);
 
+  const session_user_data = getCurrentUser(); 
   
   useEffect(() => {
     window.onscroll = () => {
@@ -87,7 +88,7 @@ const Home = () => {
   if(getCurrentUser() == null){
     return Login();
   }
-
+  
   return (
       <React.Fragment>
           <div className="timeline-top-blank-space"></div>

@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { login, logout, getCurrentUser } from '../../../custom/userFunctions';
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/login', {
@@ -12,6 +13,7 @@ async function loginUser(credentials) {
     })
         .then(data => data.json())
 }
+
 
 export default class ProfileSettingsTab extends Component {
     
@@ -26,6 +28,13 @@ export default class ProfileSettingsTab extends Component {
         // setToken(token);
     }
     
+    
+    logoutUser = () =>{
+        logout();
+        window.alert('logout');
+        window.location = '/';
+    }
+
     render() { 
         
         return (
@@ -75,6 +84,13 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <div className="input-group mb-3">
                                 <Link to="https://www.google.com" className="btn btn-primary-custom">Become a verified Expert</Link>
+                            </div>
+                        </div>
+
+                        
+                        <div className="col-md-12">
+                            <div className="input-group mb-3">
+                                <Link to="#" className="btn btn-primary-custom" onClick={this.logoutUser}>Logout</Link>
                             </div>
                         </div>
                         
