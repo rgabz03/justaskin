@@ -1,66 +1,36 @@
 import React, { Component, useState, useLayoutEffect, useCallback } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
-import { login, logout, getCurrentUser } from '../../custom/userFunctions';
+import { login, logout, getCurrentUser, getUserProfile } from '../../custom/userFunctions';
 import AboutTab from "./tabs/about";
 import SettingsTab from "./tabs/settings";
 import WalletTab from "./tabs/wallet";
 import SavedTab from "./tabs/saved";
 import axios from "axios";
 
+
 let axiosConfig = {
     headers: {
         'Accept' : 'application/json',
         'Content-Type' : 'application/json',
-        'Authorization' : 'bearer '.getCurrentUser().user_data.access_token,
+        'Authorization' : 'bearer '+ ( getCurrentUser() !=='undefined' ) ? '' : getCurrentUser().user_data.access_token,
         'Access-Control-Allow-Origin': '*'
     },
   };
 
 export default class ProfileIndex extends Component {
 
-    // handleSubmit = async (event) => {
-       
-    // }
-
-    getUserProfile = (id) => {
-        axios
-        .get("/users/profile/".id, '', axiosConfig)
-        .then(response => {
-            if (response.data.data.access.access_token) {
-            localStorage.setItem("user", JSON.stringify(response.data.data));
-            }
-            
-        })
-        .catch(error => {
-            console.log(error.response);
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                // console.log(error.response.data);
-                console.log(error.response.status);
-                // console.log(error.response.headers);
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-            }
-
-            this.setState({
-                loginClicked: false
-            });  
-            // window.alert('Oops something went wrong!');
-
+    
+    componentDidMount(){
+        Promise.all([getUserProfile()])
+        .then(function (results) {
+            console.log(results[0]);
+            document.getElementById('user-full-name').innerHTML = ( results[0]['first_name'] != null ) ? results[0]['first_name'] : 'User';
+            document.getElementById('user-job-title').innerHTML = ( results[0]['first_name'] != null ) ? results[0]['title'] : 'No Title';
         });
     }
 
     render() { 
-
-        // this.getUserProfile(getCurrentUser().user_data.id??0);
 
         return (
                 <div className="">
@@ -73,8 +43,8 @@ export default class ProfileIndex extends Component {
                                                     </div>
                                                 </center>
                                                 <div className="card-body">
-                                                    <h5 className="card-title">User Name</h5>
-                                                    <p className="card-text">Senior Developer</p>
+                                                    <h5 className="card-title" id="user-full-name"></h5>
+                                                    <p className="card-text" id="user-job-title"></p>
                                                     <a href="#" className="btn btn-primary-custom">Followers 169</a>
                                                 </div>
                                             </div>

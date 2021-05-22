@@ -74,6 +74,7 @@ export default class LoginIndex extends Component {
     }
     
     render() { 
+
         console.log(getCurrentUser());
         if(getCurrentUser()){
             return <Redirect to='/home' />
