@@ -1,7 +1,7 @@
 import React, { Component, useState, useLayoutEffect, useCallback } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
-import { login, logout, getCurrentUser, getUserProfile } from '../../custom/userFunctions';
+import { login, logout, getCurrentUser, getUserProfile, getUserFollowerCount } from '../../custom/userFunctions';
 import AboutTab from "./tabs/about";
 import SettingsTab from "./tabs/settings";
 import WalletTab from "./tabs/wallet";
@@ -22,11 +22,12 @@ export default class ProfileIndex extends Component {
 
     
     componentDidMount(){
-        Promise.all([getUserProfile()])
+        Promise.all([getUserProfile(), getUserFollowerCount()])
         .then(function (results) {
             console.log(results[0]);
             document.getElementById('user-full-name').innerHTML = ( results[0]['first_name'] != null ) ? results[0]['first_name'] : 'User';
             document.getElementById('user-job-title').innerHTML = ( results[0]['first_name'] != null ) ? results[0]['title'] : 'No Title';
+            document.getElementById('follower-count').innerHTML = ( results[1]['count'] != null ) ? results[1]['count'] : '0';
         });
     }
 
@@ -43,9 +44,9 @@ export default class ProfileIndex extends Component {
                                                     </div>
                                                 </center>
                                                 <div className="card-body">
-                                                    <h5 className="card-title" id="user-full-name"></h5>
-                                                    <p className="card-text" id="user-job-title"></p>
-                                                    <a href="#" className="btn btn-primary-custom">Followers 169</a>
+                                                    <h5 className="card-title" id="user-full-name">...</h5>
+                                                    <p className="card-text" id="user-job-title">...</p>
+                                                    <a href="#" className="btn btn-primary-custom">Followers <span id="follower-count">...</span></a>
                                                 </div>
                                             </div>
 

@@ -44,7 +44,7 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <label>First Name</label>
                             <div className="input-group mb-1">
-                                <input type="text" className="form-control" placeholder="..." aria-label="First Name" aria-describedby="basic-addon2"/>
+                                <input defaultValue="Test" type="text" className="form-control" placeholder="..." aria-label="First Name" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>
