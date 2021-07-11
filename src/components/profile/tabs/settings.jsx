@@ -42,9 +42,19 @@ export default class ProfileSettingsTab extends Component {
                     <div className="row">
                         
                         <div className="col-md-12">
-                            <label>Name</label>
+                            <label>First Name</label>
                             <div className="input-group mb-1">
-                                <input type="text" className="form-control" placeholder="Fullname" aria-label="Fullname" aria-describedby="basic-addon2"/>
+                                <input type="text" className="form-control" placeholder="..." aria-label="First Name" aria-describedby="basic-addon2"/>
+                                <div className="input-group-append">
+                                    <button className="btn btn-primary-custom" type="button">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="col-md-12">
+                            <label>Last Name</label>
+                            <div className="input-group mb-1">
+                                <input type="text" className="form-control" placeholder="..." aria-label="Last Name" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>
@@ -53,7 +63,7 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <label>Email address</label>
                             <div className="input-group mb-1">
-                                <input type="text" className="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="basic-addon2"/>
+                                <input type="text" className="form-control" placeholder="email@domain.com" aria-label="Email Address" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>
@@ -62,7 +72,7 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <label>Location</label>
                             <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Location" aria-label="Location" aria-describedby="basic-addon2"/>
+                                <input type="text" className="form-control" placeholder="..." aria-label="Location" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>
@@ -83,14 +93,14 @@ export default class ProfileSettingsTab extends Component {
                         
                         <div className="col-md-12">
                             <div className="input-group mb-3">
-                                <Link to="https://www.google.com" className="btn btn-primary-custom">Become a verified Expert</Link>
+                                <Link to="https://www.google.com" className="btn btn-primary-custom btn-lg btn-block">Become a verified Expert</Link>
                             </div>
                         </div>
 
                         
                         <div className="col-md-12">
                             <div className="input-group mb-3">
-                                <Link to="#" className="btn btn-primary-custom" onClick={this.logoutUser}>Logout</Link>
+                                <Link to="#" className="btn btn-primary-custom btn-lg btn-block" onClick={this.logoutUser}>Logout</Link>
                             </div>
                         </div>
                         

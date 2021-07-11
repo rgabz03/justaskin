@@ -53,12 +53,12 @@ export default class ProfileAboutTab extends Component {
                     <br/>
                     <div className="row">
                         <div className="col-md-12">
-                            <h6 className="text-muted">Edit Description</h6>
+                            <h6 className="text-muted">Edit Description<span className="badge badge-secondary bg-primary-custom px-2 m-1">update</span></h6>
                             <Label html={this.state.html} onChange={this.handleChange} />
                         </div>
                         
                         <div className="col-md-12">
-                            <h6 className="text-muted">Manage your interests</h6>
+                            <h6 className="text-muted">Manage your interests<button className="btn btn-sm"><i className="fa fa-plus"></i></button></h6>
                             <span className="badge badge-secondary px-2 m-1">Web development</span>
                             <span className="badge badge-secondary px-2 m-1">Javascript</span>
                             <span className="badge badge-secondary px-2 m-1">Photo Editing</span>

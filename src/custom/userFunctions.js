@@ -80,6 +80,7 @@ const getCoinBalance = async() =>{
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
                     // console.log(error.response.data);
+                    logout();
                     console.log(error.response.status);
                     // console.log(error.response.headers);
                     return error.response.status;
@@ -106,6 +107,7 @@ const getCoinBalance = async() =>{
 
 
 const getUserProfile = async() =>{
+    
     var user_session    = getCurrentUser();
 
     if(user_session != null) {
@@ -120,7 +122,7 @@ const getUserProfile = async() =>{
                 }
             })
             .then(response => {
-                // console.log(response.data.data);
+                // console.log(response.data.data)
                 return response.data.data;
             })
             .catch(error => {
@@ -129,6 +131,7 @@ const getUserProfile = async() =>{
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
                     // console.log(error.response.data);
+                    logout();
                     console.log(error.response.status);
                     // console.log(error.response.headers);
                     return error.response.status;
@@ -140,6 +143,7 @@ const getUserProfile = async() =>{
                     return error.request;
                 } else {
                     // Something happened in setting up the request that triggered an Error
+                    
                     console.log('Error', error.message);
                     return error.message;
                 }
@@ -152,7 +156,58 @@ const getUserProfile = async() =>{
 
 }
 
-export { login, logout, getCurrentUser , getCoinBalance, getUserProfile};
+
+const getUserFollowerCount = async() =>{
+    
+    var user_session    = getCurrentUser();
+
+    if(user_session != null) {
+        var user_id         = user_session.user_data.id;
+        var access_token    = user_session.access.access_token;
+
+        let res = await axios.get("/users/followers/"+user_id+"/count", {
+                headers : {
+                    'Authorization': `bearer ${access_token}`,
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json',
+                }
+            })
+            .then(response => {
+                // console.log(response.data.data)
+                return response.data.data;
+            })
+            .catch(error => {
+
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    // console.log(error.response.data);
+                    logout();
+                    console.log(error.response.status);
+                    // console.log(error.response.headers);
+                    return error.response.status;
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                    return error.request;
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    
+                    console.log('Error', error.message);
+                    return error.message;
+                }
+
+            });
+
+
+            return res;
+    }
+
+}
+
+export { login, logout, getCurrentUser , getCoinBalance, getUserProfile, getUserFollowerCount};
 
   
 
