@@ -35,6 +35,22 @@ export default class ProfileSettingsTab extends Component {
         window.location = '/';
     }
 
+    componentDidMount(){
+        Promise.all([getCurrentUser()])
+        .then(function (results) {
+            console.log("here");
+            console.log(results[0]['user_data']);
+            var first_name = document.getElementById('firstName');
+            var last_name = document.getElementById('lastName');
+            var email_address = document.getElementById('emailAddress');
+            var location = document.getElementById('location');
+            first_name.defaultValue = (results[0]['user_data']['first_name'] == null) ? '' : results[0]['user_data']['first_name'];
+            last_name.defaultValue = (results[0]['user_data']['last_name'] == null) ? '' : results[0]['user_data']['last_name'];
+            email_address.defaultValue = (results[0]['user_data']['username'] == null) ? '' : results[0]['user_data']['username'];
+            location.defaultValue = (results[0]['user_data']['location'] == null) ? '' : results[0]['user_data']['location'];
+        });
+    }
+
     render() { 
         
         return (
@@ -44,7 +60,7 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <label>First Name</label>
                             <div className="input-group mb-1">
-                                <input defaultValue="Test" type="text" className="form-control" placeholder="..." aria-label="First Name" aria-describedby="basic-addon2"/>
+                                <input id="firstName" type="text" className="form-control" placeholder="..." aria-label="First Name" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>
@@ -54,7 +70,7 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <label>Last Name</label>
                             <div className="input-group mb-1">
-                                <input type="text" className="form-control" placeholder="..." aria-label="Last Name" aria-describedby="basic-addon2"/>
+                                <input id="lastName"  type="text" className="form-control" placeholder="..." aria-label="Last Name" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>
@@ -63,7 +79,7 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <label>Email address</label>
                             <div className="input-group mb-1">
-                                <input type="text" className="form-control" placeholder="email@domain.com" aria-label="Email Address" aria-describedby="basic-addon2"/>
+                                <input id="emailAddress" type="text" className="form-control" placeholder="email@domain.com" aria-label="Email Address" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>
@@ -72,7 +88,7 @@ export default class ProfileSettingsTab extends Component {
                         <div className="col-md-12">
                             <label>Location</label>
                             <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="..." aria-label="Location" aria-describedby="basic-addon2"/>
+                                <input id="location"  type="text" className="form-control" placeholder="..." aria-label="Location" aria-describedby="basic-addon2"/>
                                 <div className="input-group-append">
                                     <button className="btn btn-primary-custom" type="button">Update</button>
                                 </div>

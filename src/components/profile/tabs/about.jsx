@@ -89,7 +89,15 @@ export default class ProfileAboutTab extends Component {
                             </Modal.Header>
                             <Modal.Body>
                                 
-                            
+                            <div className="col-md-12">
+                                <label>Description</label>
+                                <div className="input-group mb-3">
+                                <textarea className="form-control" id="description" rows="3"></textarea>
+                                    <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button">Update</button>
+                                    </div>
+                                </div>
+                            </div>
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button variant="secondary" onClick={() => this.handleClose('false')}>

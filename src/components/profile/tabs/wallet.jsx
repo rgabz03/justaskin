@@ -30,7 +30,7 @@ export default class ProfileSettingsTab extends Component {
         .then(function (results) {
             console.log(results[0]['coin']);
             var coin_balance = document.getElementById('coin-balance');
-            coin_balance.innerHTML = results[0]['coin'];
+            coin_balance.innerHTML = results[0]['coins'];
         });
     }
     

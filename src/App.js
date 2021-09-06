@@ -18,6 +18,12 @@ import './App.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { login, logout, getCurrentUser } from './custom/userFunctions';
+import styled, { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme, GlobalStyles } from "./theme";
+
+const StyledApp = styled.div`
+  color: ${ (props) => props.theme.fontColor };
+`;
 
 
 function App() {
@@ -27,13 +33,34 @@ function App() {
 
   const [offset, setOffset] = useState(0);
 
+  const [ theme, setTheme ] = useState("light");
+
   const session_user_data = getCurrentUser(); 
   
   useEffect(() => {
     window.onscroll = () => {
       setOffset(window.pageYOffset)
+    };
+
+    const localTheme = window.localStorage.getItem('theme');
+    if (localTheme) {
+      setTheme(localTheme);
+    } else {
+      setTheme('light');
     }
   }, []);
+
+
+  const themeToggler = () => {
+
+    if (theme === 'light') {
+      window.localStorage.setItem('theme', 'dark');
+      setTheme('dark');
+    } else {
+      window.localStorage.setItem('theme', 'light');
+      setTheme('light');
+    }
+  };
 
   
   // console.log(window.location.pathname);
@@ -47,23 +74,32 @@ function App() {
     <Router>
     <React.Fragment>
         {/* <Navbar/> */}
-        <main className="">
-            <Route path="/" exact component={Login} />
-            <Route path="/home" exact component={Home} />
-            <Route path="/profile" exact component={Profile} />
-            <Route path="/search" exact component={Search} />
-            <Route path="/message" exact component={Message} />
-            <Route path="/session/questions" exact component={SessionQuestions} />
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/forgotpassword" exact component={ForgotPassword} />
-            <Route path="/toc"  component={TOC} />
-            <Route path="/privacy"  component={PrivacyPolicy} />
-            <Route path="/profile/view"  component={ProfileView} />
-            <Route path="/message/view"  component={MessageView} />
-            <Route path="/questions/view"  component={QuestionView} />
-            <Route path="/timeline/questions/view"  component={TimelineQuestionView} />
-            <Route path="/ask/user"  component={AskUserForHelp} />
+        <ThemeProvider theme={ theme === "light" ? lightTheme : darkTheme}>
+          <GlobalStyles/>
+          <StyledApp>
+            
+          <button onClick={ () => themeToggler() } >Change Theme</button>
+          <main className="">
+              <Route path="/" exact component={Login} />
+              <Route path="/home" exact component={Home} />
+              <Route path="/profile" exact component={Profile} />
+              <Route path="/search" exact component={Search} />
+              <Route path="/message" exact component={Message} />
+              <Route path="/session/questions" exact component={SessionQuestions} />
+              <Route path="/signup" exact component={Signup} />
+              <Route path="/forgotpassword" exact component={ForgotPassword} />
+              <Route path="/toc"  component={TOC} />
+              <Route path="/privacy"  component={PrivacyPolicy} />
+              <Route path="/profile/view"  component={ProfileView} />
+              <Route path="/message/view"  component={MessageView} />
+              <Route path="/questions/view"  component={QuestionView} />
+              <Route path="/timeline/questions/view"  component={TimelineQuestionView} />
+              <Route path="/ask/user"  component={AskUserForHelp} />
+
+
         </main>
+        </StyledApp>
+        </ThemeProvider>
     </React.Fragment>
     </Router>
 
