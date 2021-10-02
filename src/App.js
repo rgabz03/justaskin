@@ -69,6 +69,11 @@ function App() {
   if(window.location.pathname == '/search' && offset >= 1){ search_box_element.className = 'remove-fixed-top'; }
   if(window.location.pathname == '/search' && offset >= 80){ search_box_element.className = "fixed-top-custom"; }
 
+  if(getCurrentUser() == null){
+    if( window.location.pathname != "/" ){
+      window.location = "/";
+    }
+  }
 
   return (
     <Router>
@@ -78,7 +83,7 @@ function App() {
           <GlobalStyles/>
           <StyledApp>
             
-          <button onClick={ () => themeToggler() } >Change Theme</button>
+          {/* <button onClick={ () => themeToggler() } >Change Theme</button> */}
           <main className="">
               <Route path="/" exact component={Login} />
               <Route path="/home" exact component={Home} />
@@ -139,6 +144,7 @@ const Home = () => {
 
 const Profile = () => {
   
+  console.log(getCurrentUser());
   if(getCurrentUser() == null){
     return Login();
   }

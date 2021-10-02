@@ -2,6 +2,9 @@ import React, { Component, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { login, logout, getCurrentUser } from '../../../custom/userFunctions';
+import styled, { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme, GlobalStyles } from "../../../theme";
+import Spinner from 'react-bootstrap/Spinner'
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/login', {
@@ -14,8 +17,8 @@ async function loginUser(credentials) {
         .then(data => data.json())
 }
 
-
 export default class ProfileSettingsTab extends Component {
+    
     
     handleSubmit = async (event) => {
         const username = event.target.email.value;
@@ -51,11 +54,30 @@ export default class ProfileSettingsTab extends Component {
         });
     }
 
+    
+    
+    darkModeToggle = () => {
+        // const [ theme, setTheme ] = useState("light");
+        const $ = window.$;
+        var darkmode = document.getElementById('darkmode').checked;
+        if(darkmode){
+            window.localStorage.setItem('theme', 'dark');
+        }else{
+            window.localStorage.setItem('theme', 'light');
+        }
+        window.location.href = '/profile?darkmode=1';
+    }
+
     render() { 
+
         
         return (
                 <div className="col-md-12 col-sm-12">
                     <div className="row">
+
+                    {/* <Spinner animation="grow" role="status">
+                        <span className="visually-hidden"></span>
+                    </Spinner> */}
                         
                         <div className="col-md-12">
                             <label>First Name</label>
@@ -106,6 +128,19 @@ export default class ProfileSettingsTab extends Component {
             
                             </div>
                         </div>
+
+                        <div className="col">
+                            <label>Dark Mode</label>
+                            <div className="input-group mb-3">
+                                
+                                <label className="switch">
+                                <input id="darkmode" type="checkbox" onChange={ this.darkModeToggle } checked={  ( window.localStorage.getItem("theme")  !== null &&  window.localStorage.getItem("theme") == 'dark') ? true : false }/>
+                                <span className="slider round"></span>
+                                </label>
+                                
+            
+                            </div>
+                        </div>
                         
                         <div className="col-md-12">
                             <div className="input-group mb-3">
@@ -128,3 +163,4 @@ export default class ProfileSettingsTab extends Component {
 
 }
  
+

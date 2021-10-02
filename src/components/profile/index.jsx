@@ -18,6 +18,13 @@ let axiosConfig = {
     },
   };
 
+  const search = window.location.search;
+  const params = new URLSearchParams(search);
+  const query_params_darkmode = params.get('darkmode')??0;
+
+  console.log("Settings");
+  console.log(query_params_darkmode);
+
 export default class ProfileIndex extends Component {
 
     
@@ -31,6 +38,7 @@ export default class ProfileIndex extends Component {
         });
     }
 
+    
     render() { 
 
         return (
@@ -51,11 +59,11 @@ export default class ProfileIndex extends Component {
                                             </div>
 
                                         </div>
-                                        <Tabs defaultActiveKey="about" id="uncontrolled-tab-example" fill>
+                                        <Tabs defaultActiveKey={query_params_darkmode === '1' ? "settings" : "about"} id="uncontrolled-tab-example" fill>
                                             <Tab eventKey="about" title="About">
                                                 <AboutTab/>
                                             </Tab>
-                                            <Tab eventKey="settings" title="Settings">
+                                            <Tab eventKey="settings" title="Settings"> 
                                                 <SettingsTab/>
                                             </Tab>
                                             <Tab eventKey="wallet" title="Wallet">
