@@ -72,24 +72,22 @@ export default class ProfileAboutTab extends Component {
                         logout();
                         console.log(error.response.status);
                         // console.log(error.response.headers);
-                        return error.response.status;
+                        // return error.response.status;
                     } else if (error.request) {
                         // The request was made but no response was received
                         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                         // http.ClientRequest in node.js
                         console.log(error.request);
-                        return error.request;
+                        // return error.request;
                     } else {
                         // Something happened in setting up the request that triggered an Error
                         
                         console.log('Error', error.message);
-                        return error.message;
+                        // return error.message;
                     }
     
                 });
-    
-    
-                return res;
+                // return res;
         }
 
         
@@ -100,14 +98,6 @@ export default class ProfileAboutTab extends Component {
         // this.setState({html: event.target.value}, ()=> {  console.log(this.state.html); });
         // updateUserDescription(this.state.html);
     };
-
-    // handleUpdateDescription = () => {
-    //     var description = document.getElementById('descriptionContent').value;
-    //     console.log("inputted");
-    //     this.updateUserDescription(description);
-    //     document.getElementById('Description_Label').innerHTML = description;
-    //     this.handleClose('true');
-    // }
 
     TriggerEdit = () => {
         this.handleChange('test');
@@ -141,6 +131,7 @@ export default class ProfileAboutTab extends Component {
     
       
     render() { 
+
         return (
                 <div className="col-md-12 col-sm-12 text-align-center">
                     <br/>

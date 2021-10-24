@@ -82,7 +82,6 @@ export default class LoginIndex extends Component {
         let button;
         if(clickedLogin)
         {
-            console.log('click');
             button = <Button variant="btn btn-primary-new btn-md btn-block" disabled>
                         <Spinner
                         as="span"
@@ -94,7 +93,6 @@ export default class LoginIndex extends Component {
                         <span className="">Logging in...</span>
                     </Button>;
         }else{
-            console.log('not click');
             button = <button type="submit" className="btn btn-primary-new btn-md btn-block">Login</button>;
         }
 
