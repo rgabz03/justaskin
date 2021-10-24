@@ -20,10 +20,10 @@ let axiosConfig = {
 
   const search = window.location.search;
   const params = new URLSearchParams(search);
-  const query_params_darkmode = params.get('darkmode')??0;
+  const query_params_darkmode = params.get('setting')??0;
 
   console.log("Settings");
-  console.log(query_params_darkmode);
+//   console.log(query_params_darkmode);
 
 export default class ProfileIndex extends Component {
 
@@ -31,9 +31,8 @@ export default class ProfileIndex extends Component {
     componentDidMount(){
         Promise.all([getUserProfile(), getUserFollowerCount()])
         .then(function (results) {
-            console.log(results[0]);
             document.getElementById('user-full-name').innerHTML = ( results[0]['first_name'] != null ) ? results[0]['first_name'] : 'User';
-            document.getElementById('user-job-title').innerHTML = ( results[0]['first_name'] != null ) ? results[0]['title'] : 'No Title';
+            document.getElementById('user-job-title').innerHTML = ( results[0]['job'] != null ) ? results[0]['job'] : 'No Title';
             document.getElementById('follower-count').innerHTML = ( results[1]['count'] != null ) ? results[1]['count'] : '0';
         });
     }

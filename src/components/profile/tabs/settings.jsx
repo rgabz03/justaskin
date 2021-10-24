@@ -1,34 +1,83 @@
 import React, { Component, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { login, logout, getCurrentUser } from '../../../custom/userFunctions';
+import { login, logout, getCurrentUser, getUserProfile, updateUserRecieveNotification } from '../../../custom/userFunctions';
 import styled, { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyles } from "../../../theme";
-import Spinner from 'react-bootstrap/Spinner'
+import Spinner from 'react-bootstrap/Spinner';
+import axios from "axios";
 
-async function loginUser(credentials) {
-    return fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
-        .then(data => data.json())
-}
+let axiosConfig = {
+    headers: {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Authorization' : ( getCurrentUser() ) ? "bearer "+getCurrentUser().access.access_token+"" : "",
+        'Access-Control-Allow-Origin': '*'
+    },
+  };
+
 
 export default class ProfileSettingsTab extends Component {
     
     
+    
     handleSubmit = async (event) => {
-        const username = event.target.email.value;
-        const password = event.target.password.value;
 
-        const token = await loginUser({
+
+        var user_id = getCurrentUser().user_data.id;
+        event.preventDefault();
+
+        // this.setState({
+        //     updateClicked: true
+        // });
+
+        var username = event.target.email.value;
+        var first_name = event.target.first_name.value;
+        var last_name = event.target.last_name.value;
+        var location = event.target.location.value;
+
+        axios
+        .put("/users/"+user_id+"/update/profile", {
             username,
-            password
+            first_name,
+            last_name,
+            location
+        }, axiosConfig)
+        .then(response => {
+            // if (response.data.data.access.access_token) {
+            // localStorage.setItem("user", JSON.stringify(response.data.data));
+            // }
+            window.location = 'profile?setting=1';
+            console.log(response.data.data);
+        })
+        .catch(error => {
+            console.log(error.response);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                // console.log(error.response.data);
+                console.log(error.response.status);
+                // console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                logout();
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+
+            this.setState({
+                loginClicked: false
+            });  
+            window.alert('Incorrect User Credential');
+
         });
-        // setToken(token);
+        
+        
+        return false;
     }
     
     
@@ -41,20 +90,21 @@ export default class ProfileSettingsTab extends Component {
     componentDidMount(){
         Promise.all([getCurrentUser()])
         .then(function (results) {
-            console.log("here");
-            console.log(results[0]['user_data']);
+            var email_address = document.getElementById('emailAddress');
+            email_address.defaultValue = (results[0]['user_data']['username'] == null) ? '' : results[0]['user_data']['username'];
+        });
+
+        Promise.all([getUserProfile()])
+        .then(function (results) {
             var first_name = document.getElementById('firstName');
             var last_name = document.getElementById('lastName');
-            var email_address = document.getElementById('emailAddress');
             var location = document.getElementById('location');
-            first_name.defaultValue = (results[0]['user_data']['first_name'] == null) ? '' : results[0]['user_data']['first_name'];
-            last_name.defaultValue = (results[0]['user_data']['last_name'] == null) ? '' : results[0]['user_data']['last_name'];
-            email_address.defaultValue = (results[0]['user_data']['username'] == null) ? '' : results[0]['user_data']['username'];
-            location.defaultValue = (results[0]['user_data']['location'] == null) ? '' : results[0]['user_data']['location'];
+            first_name.defaultValue = (results[0]['first_name'] == null) ? '' : results[0]['first_name'];
+            last_name.defaultValue = (results[0]['last_name'] == null) ? '' : results[0]['last_name'];
+            location.defaultValue = (results[0]['location'] == null) ? '' : results[0]['location'];
         });
+        
     }
-
-    
     
     darkModeToggle = () => {
         // const [ theme, setTheme ] = useState("light");
@@ -65,63 +115,87 @@ export default class ProfileSettingsTab extends Component {
         }else{
             window.localStorage.setItem('theme', 'light');
         }
-        window.location.href = '/profile?darkmode=1';
+        window.location.href = '/profile?setting=1';
     }
 
-    render() { 
 
+
+    receiveNotificationToggle = () => {
         
+        const $ = window.$;
+        var receiveNotification = document.getElementById('receiveNotification').checked;
+        if(receiveNotification){
+            window.localStorage.setItem('receiveNotification', 'on');
+        }else{
+            window.localStorage.setItem('receiveNotification', 'off');
+        }
+
+        updateUserRecieveNotification(window.localStorage.getItem('receiveNotification'));
+        window.location.href = '/profile?setting=1';
+    }
+
+
+    render() { 
         return (
                 <div className="col-md-12 col-sm-12">
-                    <div className="row">
+                    <div className="">
+                        <div className="">
+                            <form onSubmit={this.handleSubmit}>
+                            <div className="col-md-12">
+                                <label>First Name</label>
+                                <div className="input-group mb-1">
+                                    <input id="firstName" type="text" className="form-control" placeholder="..." aria-label="First Name" aria-describedby="basic-addon2" name="first_name"/>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button">Update</button>
+                                    </div> */}
+                                </div>
+                            </div>
 
-                    {/* <Spinner animation="grow" role="status">
-                        <span className="visually-hidden"></span>
-                    </Spinner> */}
-                        
-                        <div className="col-md-12">
-                            <label>First Name</label>
-                            <div className="input-group mb-1">
-                                <input id="firstName" type="text" className="form-control" placeholder="..." aria-label="First Name" aria-describedby="basic-addon2"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary-custom" type="button">Update</button>
+                            
+                            <div className="col-md-12">
+                                <label>Last Name</label>
+                                <div className="input-group mb-1">
+                                    <input id="lastName"  type="text" className="form-control" placeholder="..." aria-label="Last Name" aria-describedby="basic-addon2" name="last_name"/>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button">Update</button>
+                                    </div> */}
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div className="col-md-12">
-                            <label>Last Name</label>
-                            <div className="input-group mb-1">
-                                <input id="lastName"  type="text" className="form-control" placeholder="..." aria-label="Last Name" aria-describedby="basic-addon2"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary-custom" type="button">Update</button>
+                            <div className="col-md-12">
+                                <label>Email address</label>
+                                <div className="input-group mb-1">
+                                    <input id="emailAddress" type="text" className="form-control" placeholder="email@domain.com" aria-label="Email Address" aria-describedby="basic-addon2" name="email"/>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button">Update</button>
+                                    </div> */}
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-md-12">
-                            <label>Email address</label>
-                            <div className="input-group mb-1">
-                                <input id="emailAddress" type="text" className="form-control" placeholder="email@domain.com" aria-label="Email Address" aria-describedby="basic-addon2"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary-custom" type="button">Update</button>
+                            <div className="col-md-12">
+                                <label>Address</label>
+                                <div className="input-group mb-3">
+                                    <input id="location"  type="text" className="form-control" placeholder="..." aria-label="Location" aria-describedby="basic-addon2" name="location"/>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button">Update</button>
+                                    </div> */}
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-md-12">
-                            <label>Location</label>
-                            <div className="input-group mb-3">
-                                <input id="location"  type="text" className="form-control" placeholder="..." aria-label="Location" aria-describedby="basic-addon2"/>
-                                <div className="input-group-append">
-                                    <button className="btn btn-primary-custom" type="button">Update</button>
+
+                            <div className="col-md-12">
+                                <div className="input-group mb-3">
+                                    <button className="btn btn-primary-custom btn-lg btn-block" type="submit">Update</button>
                                 </div>
                             </div>
+                            </form>
                         </div>
+                    </div>     
+
+                    <div className="row">    
                         <div className="col">
                             <label>Receive Notifications</label>
                             <div className="input-group mb-3">
                                 
                                 <label className="switch">
-                                <input type="checkbox"/>
+                                <input id="receiveNotification" type="checkbox" onChange={ this.receiveNotificationToggle } checked={  ( window.localStorage.getItem("receiveNotification")  !== null &&  window.localStorage.getItem("receiveNotification") == 'on') ? true : false }/>
                                 <span className="slider round"></span>
                                 </label>
                                 

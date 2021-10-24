@@ -86,7 +86,6 @@ export default class SignupIndex extends Component {
 
         });
         
-        
         return false;
     }
     
@@ -96,7 +95,6 @@ export default class SignupIndex extends Component {
         let button;
         if(clickedLogin)
         {
-            console.log('click');
             button = <Button variant="btn btn-primary-new btn-md btn-block" disabled>
                         <Spinner
                         as="span"
@@ -108,7 +106,6 @@ export default class SignupIndex extends Component {
                         <span className="">Signing up...</span>
                     </Button>;
         }else{
-            console.log('not click');
             button = <button type="submit" className="btn btn-primary-new btn-md btn-block">Sign up</button>;
         }
 
@@ -172,14 +169,14 @@ export default class SignupIndex extends Component {
                     </form>
                     <br/>
                     <center>
-                        <div>
+                        {/* <div>
                             <div className="">or login with</div>
                             <br/>
                             <div className="panel-body">
                                 <button type="button" className="btn btn-default btn-circle"><i className="fa fa-google"></i></button>
                                 <button type="button" className="btn btn-primary btn-circle"><i className="fa fa-facebook"></i></button>
                             </div>
-                        </div>
+                        </div> */}
                     <br/>
                         <div className="span4 offset4 centered"><p>Already have an Account? <Link to="/" className="link-primary">Login now!</Link></p></div>
                         <div className="span4 offset4 centered">By signing up, you agree with our <Link to="/toc" className="link-primary">Terms & Conditions</Link></div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Slider from "react-slick";
+import { login, logout, getCurrentUser, getUserProfile, updateUserDescription } from '../custom/userFunctions';
+
 
 export default class timelineProfileList extends Component {
 
@@ -8,6 +10,16 @@ export default class timelineProfileList extends Component {
         display: true,
         width: 650,
       };
+
+
+    componentDidMount(){
+        Promise.all([getUserProfile()])
+        .then(function (results) {
+            var set_name = document.getElementById('UserName');
+            set_name.innerHTML = (results[0]['first_name'] == null) ? '' : results[0]['first_name']+" "+results[0]['last_name'];
+            
+        });
+    }
 
     render() { 
 
@@ -46,7 +58,7 @@ export default class timelineProfileList extends Component {
                             <div className="col-4 mb-4 border-right float-left">
                             <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                 data-holder-rendered="true"/>
-                                <p>Your Name</p>
+                                <p id="UserName">Your Name</p>
                             </div>
                             <div className="col-8 mb-4 float-right">
 

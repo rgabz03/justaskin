@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import LoginIndex from "./components/login/index";
+import ForgotPasswordIndex from "./components/forgot-password/index";
 import SignupIndex from "./components/signup/index";
 import HomeIndex from "./components/home/index";
 import MessageIndex from "./components/message/index";
@@ -20,6 +21,15 @@ import 'slick-carousel/slick/slick-theme.css';
 import { login, logout, getCurrentUser } from './custom/userFunctions';
 import styled, { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyles } from "./theme";
+
+let axiosConfig = {
+    headers: {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    },
+  };
+  
 
 const StyledApp = styled.div`
   color: ${ (props) => props.theme.fontColor };
@@ -69,9 +79,9 @@ function App() {
   if(window.location.pathname == '/search' && offset >= 1){ search_box_element.className = 'remove-fixed-top'; }
   if(window.location.pathname == '/search' && offset >= 80){ search_box_element.className = "fixed-top-custom"; }
 
-  if(getCurrentUser() == null){
+  if(!getCurrentUser()){
     if( window.location.pathname != "/" ){
-      window.location = "/";
+      // window.location = "/";
     }
   }
 
@@ -99,8 +109,8 @@ function App() {
               <Route path="/message/view"  component={MessageView} />
               <Route path="/questions/view"  component={QuestionView} />
               <Route path="/timeline/questions/view"  component={TimelineQuestionView} />
-              <Route path="/ask/user"  component={AskUserForHelp} />
-
+              <Route path="/become-expert"  component={BecomeExpert} />
+              
 
         </main>
         </StyledApp>
@@ -145,6 +155,7 @@ const Home = () => {
 const Profile = () => {
   
   console.log(getCurrentUser());
+  
   if(getCurrentUser() == null){
     return Login();
   }
@@ -309,7 +320,17 @@ const ForgotPassword = () => {
 
   return (
       <React.Fragment>
-          <h1>Forgot Password</h1>
+        <div className="col-md-12 col-sm-12">
+            <div className="">
+                <div className="row shadow-lg p-3 bg-white">
+                    <div className="col-2">
+                        <Link to="/" className="link-primary"><i className="fa fa-chevron-left fa-2x"></i></Link>
+                    </div>
+                    <div className="col-10"><span>Forgot Password</span></div>
+                </div>
+            </div>
+        </div>
+        <ForgotPasswordIndex/>
       </React.Fragment>
   );
 }
@@ -324,11 +345,13 @@ const TOC = () => {
                     <div className="col-2">
                         <Link to="/" className="link-primary"><i className="fa fa-chevron-left fa-2x"></i></Link>
                     </div>
-                    <div className="col-10"><span>Terms and Condtions</span></div>
+                    <div className="col-10"><span>Terms and Conditions</span></div>
                 </div>
             </div>
         </div>
-          <h1>Terms and Conditions</h1>
+          {/* <h1>Terms and Conditions</h1> */}
+          <iframe src="https://docs.google.com/document/u/2/d/1wOTHM0LHgfww43KyaZKSxrrjjXDvK2C-eWHIOeUJARY/mobilebasic"></iframe>
+                
       </React.Fragment>
   );
 }
@@ -349,7 +372,30 @@ const PrivacyPolicy = () => {
                 </div>
             </div>
         </div>
-          <h1>Privacy Policy</h1>
+          {/* <h1>Privacy Policy</h1> */}
+          <iframe src="https://docs.google.com/document/u/2/d/1vZsVRDyIW_9nhcx2XAw_M8n-NuBWozDsCHFbzrNNNpk/mobilebasic"></iframe>
+        
+      </React.Fragment>
+  );
+
+}
+
+
+const BecomeExpert = () => {
+
+  return (
+      <React.Fragment>
+        <div className="col-md-12 col-sm-12">
+            <div className="">
+                <div className="row shadow-lg p-3 bg-white">
+                    <div className="col-2">
+                        <Link to="/profile" className="link-primary"><i className="fa fa-chevron-left fa-2x"></i></Link>
+                    </div>
+                    <div className="col-10"><span>Become Expert</span></div>
+                </div>
+            </div>
+        </div>
+          <h1>Become Expert</h1>
       </React.Fragment>
   );
 
