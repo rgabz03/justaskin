@@ -33,18 +33,54 @@ export default class ProfileAboutTab extends Component {
         this.state = {
             show: null,
             html : ( getUserProfile() !== 'undefined' ) ? getUserProfile().description : '' ,
+            selectOptions : [],
+            userInterest : [],
+            value:[]
+            // id: "",
+            // name: ''
         };
     }
 
+
+    async getOptions(){
+        const res = await axios.get("/skills",axiosConfig)
+        const data = res.data.data
+
+        const options = data.map(d => ({
+            "value" : d.id,
+            "label" : d.name
+        }))
+        this.setState({selectOptions: options})
+
+    }
+
+    async getUserInterest(){
+        var user_session    = getCurrentUser();
+
+        if(user_session != null) {
+            var user_id         = user_session.user_data.id;
+            const res = await axios.get("/users/"+user_id+"/skills",axiosConfig)
+            const data = res.data.data
+
+            const options = data.map(d => ({
+                "value" : d.id,
+                "label" : d.name
+            }))
+            this.setState({userInterest: options})
+        }
+
+    }
+
+    handleSelectionChange(e){
+        // this.setState({id:e.value, name:e.label})
+        this.setState({value:e})
+    }
 
 
     handleUpdateDescription = async() =>{
     
         var user_session    = getCurrentUser();
         var description     = document.getElementById('descriptionContent').value;
-
-        console.log("here");
-        console.log(description);
     
         if(user_session != null) {
             var user_id         = user_session.user_data.id;
@@ -94,10 +130,107 @@ export default class ProfileAboutTab extends Component {
     
     }
 
-    handleChange = (event) => {
-        // this.setState({html: event.target.value}, ()=> {  console.log(this.state.html); });
-        // updateUserDescription(this.state.html);
-    };
+
+
+    handleUpdateProfession = async() =>{
+    
+        var user_session    = getCurrentUser();
+        var profession     = document.getElementById('professionContent').value;
+
+        if(user_session != null) {
+            var user_id         = user_session.user_data.id;
+            var access_token    = user_session.access.access_token;
+            var profession      = profession;
+    
+            let res = await axios.put("/users/"+user_id+"/update/profession", { profession },{
+                    headers : {
+                        'Authorization': `bearer ${access_token}`,
+                        'Accept' : 'application/json',
+                        'Content-Type' : 'application/json',
+                    }
+                })
+                .then(response => {
+                    // console.log(response.data.data)
+                    document.getElementById('Profession_Label').innerHTML = profession;
+                    document.getElementById('user-job-title').innerHTML = profession;
+
+                    this.handleClose('true');
+                })
+                .catch(error => {
+    
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        // console.log(error.response.data);
+                        logout();
+                        console.log(error.response.status);
+                        // console.log(error.response.headers);
+                        // return error.response.status;
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                        // return error.request;
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        
+                        console.log('Error', error.message);
+                        // return error.message;
+                    }
+    
+                });
+                // return res;
+        }
+
+        
+    
+    }
+
+    handleSubmitSkillsInterest = async() => {
+
+        var user_session    = getCurrentUser();
+        var profession     = document.getElementById('professionContent').value;
+
+        if(user_session != null) {
+            var user_id         = user_session.user_data.id;
+            var access_token    = user_session.access.access_token;
+            var profession      = profession;
+    
+            let res = await axios.post("/users/"+user_id+"/update/profession", { profession },axiosConfig)
+                .then(response => {
+                    this.handleClose('true');
+                })
+                .catch(error => {
+    
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        // console.log(error.response.data);
+                        logout();
+                        console.log(error.response.status);
+                        // console.log(error.response.headers);
+                        // return error.response.status;
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                        // return error.request;
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        
+                        console.log('Error', error.message);
+                        // return error.message;
+                    }
+    
+                });
+                // return res;
+        }
+
+    }
+
+    
 
     TriggerEdit = () => {
         this.handleChange('test');
@@ -124,14 +257,18 @@ export default class ProfileAboutTab extends Component {
             console.log('description');
             console.log(results[0]['description']);
             var set_description = document.getElementById('Description_Label');
+            var set_profession = document.getElementById('Profession_Label');
             set_description.innerHTML = (results[0]['description'] == null) ? '' : results[0]['description'];
-            
+            set_profession.innerHTML = (results[0]['job'] == null) ? '' : results[0]['job'];
         });
+
+        this.getOptions();
+        this.getUserInterest();
     }
     
       
     render() { 
-
+        console.log(this.state.value);
         return (
                 <div className="col-md-12 col-sm-12 text-align-center">
                     <br/>
@@ -141,16 +278,24 @@ export default class ProfileAboutTab extends Component {
                             {/* <Label html={this.state.html} onChange={this.handleChange} /> */}
                             <label id="Description_Label"></label>
                         </div>
+
+                        <div className="col-md-12">
+                            <h6 className="text-muted">Edit Profession<span className="badge badge-secondary bg-primary-custom px-2 m-1" onClick={() => this.handleShow('profession')}>update</span></h6>
+                            {/* <Label html={this.state.html} onChange={this.handleChange} /> */}
+                            <label id="Profession_Label"></label>
+                        </div>
                         
                         <div className="col-md-12">
-                            <h6 className="text-muted">Manage your interests
+                            <h6 className="text-muted">Manage your interest
                             <Button className="btn btn-sm" variant="btn btn-sm" onClick={() => this.handleShow('interest')}>
                             <i className="fa fa-plus"></i>
                             </Button>
                             </h6>
-                            <span className="badge badge-secondary px-2 m-1">Web development</span>
+                            {this.state.userInterest.map(d => (<span className="badge badge-secondary px-2 m-1" key={d.value}>{d.label}</span>))} 
+
+                            {/* <span className="badge badge-secondary px-2 m-1">Web development</span>
                             <span className="badge badge-secondary px-2 m-1">Javascript</span>
-                            <span className="badge badge-secondary px-2 m-1">Photo Editing</span>
+                            <span className="badge badge-secondary px-2 m-1">Photo Editing</span> */}
                         </div>
 
                         <Modal show={this.state.show == 'interest'} onHide={() => this.handleClose('false')}>
@@ -158,9 +303,15 @@ export default class ProfileAboutTab extends Component {
                                 <Modal.Title>ADD SKILLS OR INTEREST</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                            <Select options={options} />
+                            {/* <Select options={this.state.selectOptions} onChange={this.handleSelectionChange.bind(this)} /> */}
+                            <div  className="col-md-12">
+                            <Select options={this.state.selectOptions} onChange={this.handleSelectionChange.bind(this)} isMulti />
+                            </div>
                             </Modal.Body>
                             <Modal.Footer>
+                                <Button variant="primary" onClick={() => this.handleSubmitSkillsInterest()}>
+                                Update
+                                </Button>
                                 <Button variant="secondary" onClick={() => this.handleClose('false')}>
                                 Close
                                 </Button>
@@ -178,6 +329,29 @@ export default class ProfileAboutTab extends Component {
                                 <textarea id="descriptionContent" className="form-control" rows="3"></textarea>
                                     <div className="input-group-append">
                                         <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateDescription}>Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={() => this.handleClose('false')}>
+                                Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+
+                        <Modal show={this.state.show == 'profession'} onHide={() => this.handleClose('false')}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>EDIT PROFESSION</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                
+                            <div className="col-md-12">
+                                <label>Profession</label>
+                                <div className="input-group mb-3">
+                                <textarea id="professionContent" className="form-control" rows="3"></textarea>
+                                    <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateProfession}>Update</button>
                                     </div>
                                 </div>
                             </div>

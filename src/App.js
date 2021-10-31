@@ -79,9 +79,9 @@ function App() {
   if(window.location.pathname == '/search' && offset >= 1){ search_box_element.className = 'remove-fixed-top'; }
   if(window.location.pathname == '/search' && offset >= 80){ search_box_element.className = "fixed-top-custom"; }
 
-  if(!getCurrentUser()){
+  if(getCurrentUser() == false){
     if( window.location.pathname != "/" ){
-      // window.location = "/";
+      window.location = "/";
     }
   }
 
