@@ -72,7 +72,6 @@ export default class ProfileAboutTab extends Component {
     }
 
     handleSelectionChange(e){
-        // this.setState({id:e.value, name:e.label})
         this.setState({value:e})
     }
 
@@ -187,19 +186,23 @@ export default class ProfileAboutTab extends Component {
     
     }
 
-    handleSubmitSkillsInterest = async() => {
-
+    handleSubmitSkillsInterest = async(event) => {
+        
         var user_session    = getCurrentUser();
-        var profession     = document.getElementById('professionContent').value;
 
         if(user_session != null) {
             var user_id         = user_session.user_data.id;
-            var access_token    = user_session.access.access_token;
-            var profession      = profession;
+            var interest        = this.state.value;
+
+
+            if(interest.length <= 0){
+                event.preventDefault();
+            }
     
-            let res = await axios.post("/users/"+user_id+"/update/profession", { profession },axiosConfig)
+            let res = await axios.put("/users/"+user_id+"/skills/update", { interest },axiosConfig)
                 .then(response => {
                     this.handleClose('true');
+                    window.location.reload(false);
                 })
                 .catch(error => {
     
@@ -226,8 +229,63 @@ export default class ProfileAboutTab extends Component {
     
                 });
                 // return res;
+                event.preventDefault();
         }
 
+    }
+
+
+    handleDeleteInterest = async(id, interest) => {
+
+        var user_session    = getCurrentUser();
+
+        if(user_session != null) {
+            var user_id         = user_session.user_data.id;
+
+            if( id == ''){
+                alert("Not Allowed");
+                return false;
+            }
+
+            var answer = window.confirm("Do you want to delete "+interest+"?");
+
+            if(answer){
+
+                let res = await axios.delete("/users/"+user_id+"/skills/"+id+"/delete", axiosConfig)
+                    .then(response => {
+                        window.location.reload(false);
+                    })
+                    .catch(error => {
+        
+                        if (error.response) {
+                            // The request was made and the server responded with a status code
+                            // that falls out of the range of 2xx
+                            // console.log(error.response.data);
+                            logout();
+                            console.log(error.response.status);
+                            // console.log(error.response.headers);
+                            // return error.response.status;
+                        } else if (error.request) {
+                            // The request was made but no response was received
+                            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                            // http.ClientRequest in node.js
+                            console.log(error.request);
+                            // return error.request;
+                        } else {
+                            // Something happened in setting up the request that triggered an Error
+                            
+                            console.log('Error', error.message);
+                            // return error.message;
+                        }
+        
+                    });
+                    
+                    return false;
+            }else{
+                return false;   
+            }
+
+        }
     }
 
     
@@ -291,7 +349,7 @@ export default class ProfileAboutTab extends Component {
                             <i className="fa fa-plus"></i>
                             </Button>
                             </h6>
-                            {this.state.userInterest.map(d => (<span className="badge badge-secondary px-2 m-1" key={d.value}>{d.label}</span>))} 
+                            {this.state.userInterest.map(d => (<span className="badge badge-secondary px-2 m-1" key={d.value}>{d.label} <i className="fa fa-times-circle" onClick={() => this.handleDeleteInterest(d.value, d.label)}></i></span>))} 
 
                             {/* <span className="badge badge-secondary px-2 m-1">Web development</span>
                             <span className="badge badge-secondary px-2 m-1">Javascript</span>
@@ -299,23 +357,25 @@ export default class ProfileAboutTab extends Component {
                         </div>
 
                         <Modal show={this.state.show == 'interest'} onHide={() => this.handleClose('false')}>
+                            {/* <form onSubmit={}> */}
                             <Modal.Header closeButton>
                                 <Modal.Title>ADD SKILLS OR INTEREST</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                             {/* <Select options={this.state.selectOptions} onChange={this.handleSelectionChange.bind(this)} /> */}
                             <div  className="col-md-12">
-                            <Select options={this.state.selectOptions} onChange={this.handleSelectionChange.bind(this)} isMulti />
+                            <Select options={this.state.selectOptions} onChange={this.handleSelectionChange.bind(this)} required isMulti />
                             </div>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="primary" onClick={() => this.handleSubmitSkillsInterest()}>
+                                <Button variant="primary" onClick={this.handleSubmitSkillsInterest}>
                                 Update
                                 </Button>
                                 <Button variant="secondary" onClick={() => this.handleClose('false')}>
                                 Close
                                 </Button>
                             </Modal.Footer>
+                            {/* </form> */}
                         </Modal>
                         <Modal show={this.state.show == 'description'} onHide={() => this.handleClose('false')}>
                             <Modal.Header closeButton>
