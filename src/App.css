@@ -123,7 +123,11 @@ img.avatar {
 
 
 .ask-user-question-bottom-space {
-  height: 50vh;
+  height: 70vh;
+}
+
+.allowance-bottom-space{
+  height: 20vh;
 }
 
 
@@ -386,3 +390,13 @@ iframe {
   width: 100vw;
 }
 
+
+
+.hide-some-text {
+  width: 10vh; text-overflow: ellipsis; white-space: nowrap;
+  overflow: hidden
+}
+
+.text-dark {
+  color : #343a40 !important;
+}

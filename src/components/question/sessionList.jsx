@@ -1,5 +1,16 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { login, logout, getCurrentUser, getUserProfile, updateUserDescription } from '../../custom/userFunctions';
+import axios from "axios";
+
+let axiosConfig = {
+    headers: {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Authorization' : ( getCurrentUser() ) ? "bearer "+getCurrentUser().access.access_token+"" : "",
+        'Access-Control-Allow-Origin': '*'
+    },
+  };
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/login', {
@@ -14,6 +25,14 @@ async function loginUser(credentials) {
 
 export default class SessionList extends Component {
 
+    constructor(props, context) {
+        super(props, context);
+
+        this.state = {
+            userMessages:[]
+        };
+    }
+
     handleSubmit = async (event) => {
         const username = event.target.email.value;
         const password = event.target.password.value;
@@ -24,12 +43,90 @@ export default class SessionList extends Component {
         });
         // setToken(token);
     }
+
+
+    async getMyMessages(){
+        var user_session    = getCurrentUser();
+
+        if(user_session != null) {
+            var user_id         = user_session.user_data.id;
+            const res = await axios.get("/users/"+user_id+"/messages/",axiosConfig)
+            const data = res.data.data
+
+            const options = data.map(d => ({
+                "profile_picture" : d.picture_path,
+                "content" : d.content,
+                "message_count" : d.message_count,
+                "created_date" : d.created_date,
+                "id"        : d.id,
+                "user_id"        : d.user_id
+            }))
+            this.setState({userMessages: options})
+        }
+
+    }
+
+
+     handletimeSince = (date) => {
+
+        var seconds = Math.floor((new Date() - date) / 1000);
+    
+        var interval = seconds / 31536000;
+    
+        if (interval > 1) {
+        return Math.floor(interval) + " years";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+        return Math.floor(interval) + " months";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+        return Math.floor(interval) + " days";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+        return Math.floor(interval) + " hours";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+        return Math.floor(interval) + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+    }
+
+
+
+    componentDidMount(){
+        this.getMyMessages();
+    }
     
     render() { 
         
         return (
             <div className="list-group message-list">
-                <Link to="/questions/view/1" className="list-group-item list-group-item-action flex-column align-items-start custom-active">
+                
+                {this.state.userMessages.map(d => (
+                <Link to={"/questions/view/"+d.user_id}  className={( d.message_count > 0 ) ? "list-group-item list-group-item-action flex-column align-items-start custom-active": "list-group-item list-group-item-action flex-column align-items-start"  }>
+                    <div className="row">
+                        <div className="col-4">
+                            <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                                data-holder-rendered="true"/>
+                        </div>
+                        <div className="col-8">
+                            <div className="d-flex w-100 justify-content-between">
+                                <h5 className="mb-1">Question ...</h5>
+                                <small>{ this.handletimeSince(new Date( Date.parse(d.created_date)  - 24 * 60 * 60 * 1000)) } ago</small>
+                            </div>
+                            
+                            <p className="mb-1 hide-some-text">{d.content}</p>
+                            <span className="badge badge-danger badge-pill position-relative float-right">{d.message_count}</span>
+                        </div>
+                    </div>
+                </Link>
+                ))} 
+
+                {/* <Link to="/questions/view/1" className="list-group-item list-group-item-action flex-column align-items-start custom-active">
                     <div className="row">
                         <div className="col-4">
                             <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
@@ -74,7 +171,7 @@ export default class SessionList extends Component {
                             <p className="mb-1">This is the content of the user message...</p>
                         </div>
                     </div>
-                </Link>
+                </Link> */}
             </div>
         );
     }
