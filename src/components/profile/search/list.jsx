@@ -22,6 +22,7 @@ export default class List extends Component {
         this.state = {
             userList:[],
             searchKeyword : '',
+            followed: '',
         };
     }
     
@@ -40,24 +41,13 @@ export default class List extends Component {
                 "title"             : d.job,
                 "posts_count"       : d.posts_count,
                 "followers_count"   : d.followers_count,
-                "followed"          : ( this.checkIfFollowed(d.id) ) ? true : false,
-                "id"                : d.id,
+                "followed"          : d.followed,
+                "id"                : d.id
             }));
 
+            console.log(options);
             this.setState({userList: options});
         
-        }
-
-    }
-
-    async checkIfFollowed(friend_id){
-        var user_session    = getCurrentUser();  
-
-        if(user_session != null) {
-            var user_id         = user_session.user_data.id;
-            const res = await axios.get("/users/"+user_id+"/checkfollowed/"+friend_id,axiosConfig)
-            const data = res.data.data;
-            return data.followed;
         }
 
     }
@@ -73,7 +63,7 @@ export default class List extends Component {
     }
     
     componentDidMount(){
-        this.getUsersList(this.state.searchKeyword);
+        this.getUsersList();
     }
 
 
@@ -100,7 +90,7 @@ export default class List extends Component {
                                             <div className="d-flex flex-column"> <span className="articles">Post</span> <span className="number1">{d.posts_count}</span> </div>
                                             <div className="d-flex flex-column"> <span className="followers">Followers</span> <span className="number2">{ d.followers_count }</span> </div>
                                         </div>
-                                        <div className="button mt-2 d-flex flex-row align-items-center"> <Link to={"ask/user/" + d.id} className="btn btn-sm btn-outline-primary-custom w-100">Ask</Link> <button className="btn btn-sm btn-primary-custom w-100 ml-2">{ ( d.followed ) ? "Followed" : "Follow" }  { d.followed  }</button> </div>
+                                        <div className="button mt-2 d-flex flex-row align-items-center"> <Link to={"ask/user/" + d.id} className="btn btn-sm btn-outline-primary-custom w-100">Ask</Link> <button className="btn btn-sm btn-primary-custom w-100 ml-2"> { (d.followed) ? "Followed" : "Follow" }  </button> </div>
                                     </div>
                                 </div>
                             </div>
