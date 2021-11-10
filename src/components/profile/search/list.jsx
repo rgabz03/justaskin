@@ -90,7 +90,7 @@ export default class List extends Component {
                                             <div className="d-flex flex-column"> <span className="articles">Post</span> <span className="number1">{d.posts_count}</span> </div>
                                             <div className="d-flex flex-column"> <span className="followers">Followers</span> <span className="number2">{ d.followers_count }</span> </div>
                                         </div>
-                                        <div className="button mt-2 d-flex flex-row align-items-center"> <Link to={"ask/user/" + d.id} className="btn btn-sm btn-outline-primary-custom w-100">Ask</Link> <button className="btn btn-sm btn-primary-custom w-100 ml-2"> { (d.followed) ? "Followed" : "Follow" }  </button> </div>
+                                        <div className="button mt-2 d-flex flex-row align-items-center"> <Link to={"ask/user/" + d.id} className="btn btn-sm btn-outline-primary-custom w-100">Ask</Link> <button className="btn btn-sm btn-primary-custom w-100 ml-2"> { (d.followed) ? "Following" : "Follow" }  </button> </div>
                                     </div>
                                 </div>
                             </div>
