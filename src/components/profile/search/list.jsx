@@ -52,6 +52,26 @@ export default class List extends Component {
 
     }
 
+
+    handleFollowUser = async(followed,id) =>{
+        var user_session    = getCurrentUser(); 
+
+        if(user_session != null && !followed) {
+            var user_id         = user_session.user_data.id;
+            
+            const res = await axios.get("/users/"+user_id+"/follow/"+id ,axiosConfig)
+            const data = res.data.data;
+            
+            console.log(data);
+
+            if(data){
+                document.getElementById('follow-button-'+id).innerHTML = 'Following';
+            }
+        
+        }
+
+    }
+
     handleSearchChange = (event) => {
         var input_value = document.getElementById('searchKeyword').value;
         this.setState({
@@ -61,6 +81,7 @@ export default class List extends Component {
         this.getUsersList(( input_value == '' ) ? '' : this.state.searchKeyword);
 
     }
+
     
     componentDidMount(){
         this.getUsersList();
@@ -90,7 +111,7 @@ export default class List extends Component {
                                             <div className="d-flex flex-column"> <span className="articles">Post</span> <span className="number1">{d.posts_count}</span> </div>
                                             <div className="d-flex flex-column"> <span className="followers">Followers</span> <span className="number2">{ d.followers_count }</span> </div>
                                         </div>
-                                        <div className="button mt-2 d-flex flex-row align-items-center"> <Link to={"ask/user/" + d.id} className="btn btn-sm btn-outline-primary-custom w-100">Ask</Link> <button className="btn btn-sm btn-primary-custom w-100 ml-2"> { (d.followed) ? "Following" : "Follow" }  </button> </div>
+                                        <div className="button mt-2 d-flex flex-row align-items-center"> <Link to={"ask/user/" + d.id} className="btn btn-sm btn-outline-primary-custom w-100">Ask</Link> <button id={"follow-button-"+d.id} className="btn btn-sm btn-primary-custom w-100 ml-2" onClick={() => this.handleFollowUser(d.followed,d.id)} > { (d.followed) ? "Following" : "Follow" }  </button> </div>
                                     </div>
                                 </div>
                             </div>
