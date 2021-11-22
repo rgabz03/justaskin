@@ -41,13 +41,15 @@ export default class ProfileSettingsTab extends Component {
         var first_name = event.target.first_name.value;
         var last_name = event.target.last_name.value;
         var location = event.target.location.value;
+        var coins_charge = event.target.coins_charge.value;
 
         axios
         .put("/users/"+user_id+"/update/profile", {
             username,
             first_name,
             last_name,
-            location
+            location,
+            coins_charge
         }, axiosConfig)
         .then(response => {
             // if (response.data.data.access.access_token) {
@@ -107,9 +109,11 @@ export default class ProfileSettingsTab extends Component {
             var first_name = document.getElementById('firstName');
             var last_name = document.getElementById('lastName');
             var location = document.getElementById('location');
+            var coins_charge = document.getElementById('coins_charge');
             first_name.defaultValue = (results[0]['first_name'] == null) ? '' : results[0]['first_name'];
             last_name.defaultValue = (results[0]['last_name'] == null) ? '' : results[0]['last_name'];
             location.defaultValue = (results[0]['location'] == null) ? '' : results[0]['location'];
+            coins_charge.defaultValue = (results[0]['coins_charge'] == null) ? '' : results[0]['coins_charge'];
         });
         
     }
@@ -206,6 +210,17 @@ export default class ProfileSettingsTab extends Component {
                                 <label>Address</label>
                                 <div className="input-group mb-3">
                                     <input id="location"  type="text" className="form-control" placeholder="..." aria-label="Location" aria-describedby="basic-addon2" name="location"/>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button">Update</button>
+                                    </div> */}
+                                </div>
+                            </div>
+
+
+                            <div className="col-md-12">
+                                <label>Coins Charge</label>
+                                <div className="input-group mb-3">
+                                    <input id="coins_charge"  type="number" className="form-control" placeholder="0" aria-label="coins_charge" aria-describedby="basic-addon2" name="coins_charge" min="1" max="9999999"/>
                                     {/* <div className="input-group-append">
                                         <button className="btn btn-primary-custom" type="button">Update</button>
                                     </div> */}

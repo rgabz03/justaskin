@@ -59,9 +59,12 @@ export default class SessionList extends Component {
                 "message_count" : d.message_count,
                 "created_date" : d.created_date,
                 "id"        : d.id,
-                "user_id"        : d.user_id
+                "user_id"        : d.user_id,
+                "status"        : d.status,
             }))
             this.setState({userMessages: options})
+
+            console.log(options);
         }
 
     }
@@ -107,7 +110,7 @@ export default class SessionList extends Component {
             <div className="list-group message-list">
                 
                 {this.state.userMessages.map(d => (
-                <Link to={"/questions/view/"+d.user_id}  className={( d.message_count > 0 ) ? "list-group-item list-group-item-action flex-column align-items-start custom-active": "list-group-item list-group-item-action flex-column align-items-start"  }>
+                <Link to={"/questions/view/"+d.user_id}  className={( d.message_count > 0 && d.status == "unread") ? "list-group-item list-group-item-action flex-column align-items-start custom-active": "list-group-item list-group-item-action flex-column align-items-start"  }>
                     <div className="row">
                         <div className="col-4">
                             <img className="img-thumbnail rounded-circle timeline-profile-list" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
@@ -120,7 +123,7 @@ export default class SessionList extends Component {
                             </div>
                             
                             <p className="mb-1 hide-some-text">{d.content}</p>
-                            <span className="badge badge-danger badge-pill position-relative float-right">{d.message_count}</span>
+                            { (d.message_count > 0 && d.status == "unread" ) ? (<span className="badge badge-danger badge-pill position-relative float-right">{d.message_count}</span>) : "" }
                         </div>
                     </div>
                 </Link>

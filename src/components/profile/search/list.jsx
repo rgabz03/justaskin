@@ -61,8 +61,6 @@ export default class List extends Component {
             
             const res = await axios.get("/users/"+user_id+"/follow/"+id ,axiosConfig)
             const data = res.data.data;
-            
-            console.log(data);
 
             if(data){
                 document.getElementById('follow-button-'+id).innerHTML = 'Following';

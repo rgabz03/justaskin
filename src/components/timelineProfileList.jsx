@@ -1,15 +1,73 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Slider from "react-slick";
+import { Tab, Tabs, Modal, Button } from 'react-bootstrap';
 import { login, logout, getCurrentUser, getUserProfile, updateUserDescription } from '../custom/userFunctions';
+import axios from "axios";
+
+let axiosConfig = {
+    headers: {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json',
+        'Authorization' : ( getCurrentUser() ) ? "bearer "+getCurrentUser().access.access_token+"" : "",
+        'Access-Control-Allow-Origin': '*'
+    },
+  };
 
 
 export default class timelineProfileList extends Component {
 
+      constructor(props, context) {
+        super(props, context);
+
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+
+  
+        this.state = {
+            followedList:[],
+            display: true,
+            width: 650,
+            show: null,
+        };
+    }
+
+    async getFollowedUserList(){
+        var user_session    = getCurrentUser(); 
+
+        if(user_session != null) {
+            var user_id         = user_session.user_data.id;
+            
+            const res = await axios.get("/users/"+user_id+"/following",axiosConfig)
+            const data = res.data.data;
+
+            const options = data.map(d => ({
+                "follower_name"     : d.follower_name,
+                "picture_path"      : d.picture_path,
+                "follower_id"       : d.follower_id,
+                "id"       : d.id,
+            }));
+            this.setState({followedList: options});
+            
+        
+        }
+
+    }
+
     state = {
-        display: true,
-        width: 650,
-      };
+        isOpen: false
+    };
+
+    openModal = () => this.setState({ isOpen: true });
+    closeModal = () => this.setState({ isOpen: false });
+    
+    handleClose(id) {
+        this.setState({show: id});
+    }
+
+    handleShow(id) {
+    this.setState({show: id});
+    }
 
 
     componentDidMount(){
@@ -19,6 +77,8 @@ export default class timelineProfileList extends Component {
             set_name.innerHTML = (results[0]['first_name'] == null) ? '' : results[0]['first_name']+" "+results[0]['last_name'];
             
         });
+
+        this.getFollowedUserList();
     }
 
     render() { 
@@ -48,7 +108,6 @@ export default class timelineProfileList extends Component {
             width : 120
             
           };
-
         return ( 
             <div className="fixed-top bg-white">
                 <div className="container-fluid border-top padding-top-10">
@@ -69,36 +128,46 @@ export default class timelineProfileList extends Component {
                                 }}
                                 >
                                     <Slider {...settings}>
-                                    <div>
+                                    {this.state.followedList.map(d => (
+                                        <div>
+                                            <center>
+                                            <img className="img-thumbnail rounded-circle timeline-profile-list-slider" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                                                data-holder-rendered="true"/>
+                                            <p>{d.follower_name}</p>
+                                            </center>
+                                        </div>
+                                    ))}
+                                    
+                                    {/* <div>
                                         <center>
                                         <img className="img-thumbnail rounded-circle timeline-profile-list-slider" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                             data-holder-rendered="true"/>
                                         <p>Friend Name 1</p>
                                         </center>
-                                    </div>
-                                    <div>
+                                    </div> */}
+                                    {/* <div>
                                         <center>
                                         <img className="img-thumbnail rounded-circle timeline-profile-list-slider" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                             data-holder-rendered="true"/>
                                         <p>Friend Name 2</p>
                                         </center>
-                                    </div>
-                                    <div>
+                                    </div> */}
+                                    {/* <div className="hide"> 
                                         <center>
                                         <img className="img-thumbnail rounded-circle timeline-profile-list-slider" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                             data-holder-rendered="true"/>
                                         <p>Friend Name 3</p>
                                         </center>
-                                    </div>
+                                    </div> */}
 
                                     
-                                    <div>
+                                    {/* <div>
                                         <center>
                                         <img className="img-thumbnail rounded-circle timeline-profile-list-slider" alt="100x100" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
                                             data-holder-rendered="true"/>
                                         <p>Friend Name 4</p>
                                         </center>
-                                    </div>
+                                    </div> */}
                                         
                                     </Slider>
                                 </div>
@@ -141,6 +210,63 @@ export default class timelineProfileList extends Component {
                             
                         </div>
                 </div>
+                
+
+                <div className="container-fluid border-top padding-top-10">
+                    <div className="">
+
+                        <div className="row text-center border-bottom shadow-sm">
+                            <div className="col-md-12">
+                                {/* <form className="form-inline" role="form">            */}
+                                        <div className="form-group">
+                                            {/* <input type="email" className="form-control" id="postQuestion" aria-describedby="postQuestion" placeholder="What's your Question?" onChange={() => this.handleShow('postQuestion')} disabled/> */}
+                                            {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                                            <button type="button" className="btn btn-light btn-outline-secondary btn-block"><span className="text-muted"  onClick={() => this.handleShow('postQuestion')}>Post your own Question</span></button>
+                                        
+                                        </div>
+                                {/* </form> */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                        <Modal show={this.state.show == 'postQuestion'} onHide={() => this.handleClose('false')}>
+                            <Modal.Header closeButton>
+                                <Modal.Title></Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                
+                            <div className="col-md-12">
+                                <div className="input-group mb-3">
+                                <input id="postTitle" className="form-control" rows="3" type="text" placeholder="Your Question"/>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateDescription}>Update</button>
+                                    </div> */}
+                                </div>
+                                <div className="input-group mb-3">
+                                <textarea id="postContent" className="form-control" rows="3">Write your content here...</textarea>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateDescription}>Update</button>
+                                    </div> */}
+                                </div>
+                                <div className="input-group mb-3">
+                                <input type="file" id="postFile" className="form-control" rows="3" placeholder="upload videos/images"/>
+                                    {/* <div className="input-group-append">
+                                        <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateDescription}>Update</button>
+                                    </div> */}
+                                </div>
+                            </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="primary" onClick={() => this.handleClose('false')}>
+                                Submit
+                                </Button>
+                                <Button variant="secondary" onClick={() => this.handleClose('false')}>
+                                Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+
             </div>
         );
     }
