@@ -54,6 +54,83 @@ export default class timelineProfileList extends Component {
 
     }
 
+
+    async postTimeline(){
+
+        console.log("here");
+        var user_session    = getCurrentUser();
+
+        if( document.getElementById("postTitle").value == '' ){
+            alert("Question is required");
+            return false;
+        }
+        
+        if( document.getElementById("postFile").files.length == 0 ){
+            alert("File upload is required");
+            return false;
+        }
+        
+        
+        if(user_session != null) {
+            var user_id         = user_session.user_data.id;
+            var access_token    = user_session.access.access_token;
+
+            var formData = new FormData();
+            var imagefile = document.querySelector('#postFile');
+            formData.append("image", imagefile.files[0]);
+            formData.append("title", document.getElementById('postTitle').value);
+            formData.append("content", document.getElementById('postContent').value);
+            
+            let res = await axios.post("/users/"+user_id+"/posts", formData ,{
+                    headers : {
+                        'Authorization': `bearer ${access_token}`,
+                        'Accept' : 'application/json',
+                        'Content-Type' : 'multipart/form-data',
+                    }
+                })
+                .then(response => {
+                    // console.log(response.data.data)
+                    return response.data.data;
+                })
+                .catch(error => {
+
+                    if (error.response) {
+                        // The request was made and the server responded with a status code
+                        // that falls out of the range of 2xx
+                        // console.log(error.response.data);
+                        // logout();
+                        console.log(error.response.status);
+                        if(error.response.status == 422){
+                            alert("Uploaded file is not allowed");
+                            return false;
+                        }
+                        if(error.response.status == 413){
+                            alert("Uploaded file is too larage");
+                            return false;
+                        }
+                        // console.log(error.response.headers);
+                        return error.response.status;
+                    } else if (error.request) {
+                        // The request was made but no response was received
+                        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                        // http.ClientRequest in node.js
+                        console.log(error.request);
+                        return error.request;
+                    } else {
+                        // Something happened in setting up the request that triggered an Error
+                        
+                        console.log('Error', error.message);
+                        return error.message;
+                    }
+
+                });
+
+
+                return res;
+        }
+        
+    }
+
     state = {
         isOpen: false
     };
@@ -238,19 +315,19 @@ export default class timelineProfileList extends Component {
                                 
                             <div className="col-md-12">
                                 <div className="input-group mb-3">
-                                <input id="postTitle" className="form-control" rows="3" type="text" placeholder="Your Question"/>
+                                <input id="postTitle" className="form-control" rows="3" type="text" placeholder="Your Question" name='postTitle' required/>
                                     {/* <div className="input-group-append">
                                         <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateDescription}>Update</button>
                                     </div> */}
                                 </div>
                                 <div className="input-group mb-3">
-                                <textarea id="postContent" className="form-control" rows="3">Write your content here...</textarea>
+                                <textarea id="postContent" className="form-control" rows="3" defaultValue='Provide additional content to your post' name="postContent"></textarea>
                                     {/* <div className="input-group-append">
                                         <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateDescription}>Update</button>
                                     </div> */}
                                 </div>
                                 <div className="input-group mb-3">
-                                <input type="file" id="postFile" className="form-control" rows="3" placeholder="upload videos/images"/>
+                                <input type="file" id="postFile" className="form-control" rows="3" placeholder="upload videos/images" required/>
                                     {/* <div className="input-group-append">
                                         <button className="btn btn-primary-custom" type="button" onClick={this.handleUpdateDescription}>Update</button>
                                     </div> */}
@@ -258,7 +335,7 @@ export default class timelineProfileList extends Component {
                             </div>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="primary" onClick={() => this.handleClose('false')}>
+                                <Button variant="primary" onClick={() => this.postTimeline(this)}>
                                 Submit
                                 </Button>
                                 <Button variant="secondary" onClick={() => this.handleClose('false')}>

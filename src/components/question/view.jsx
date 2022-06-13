@@ -68,6 +68,7 @@ export default class View extends Component {
             var user_id         = user_session.user_data.id;
             const res = await axios.get("/users/"+user_id+"/messages/"+friend_id+"/name",axiosConfig)
             const data = res.data.data;
+            console.log(data);
 
             const options = data.map(d => ({
                 "profile_picture" : d.picture_path,

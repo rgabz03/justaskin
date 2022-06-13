@@ -4,7 +4,7 @@ import TimelineProfileList from "../timelineProfileList";
 import TimeLineQuestion from "../question/timeline";
 import config from '../../Config';
 import axios from "axios";
-import { login, logout, getCurrentUser, getUserProfile, updateUserDescription } from '../../custom/userFunctions';
+import { login, logout, getCurrentUser, getUserProfile, updateUserDescription, likePost } from '../../custom/userFunctions';
 
 let axiosConfig = {
     headers: {
@@ -24,8 +24,7 @@ export default class HomeIndex extends Component{
         this.state = {
             posts:[],
         };
-    }
-
+    }   
 
     async getPosts(){
         var user_session    = getCurrentUser(); 
@@ -55,6 +54,7 @@ export default class HomeIndex extends Component{
         }
 
     }
+
 
     handletimeSince = (date) => {
 
@@ -149,7 +149,7 @@ export default class HomeIndex extends Component{
                         <div className="container">
                             <div className="d-flex justify-content-between bd-highlight">
                                 <div className="d-flex justify-content-start mb-3">
-                                    <div className="p-2 bd-highlight"><i className="fa fa-heart"></i></div>
+                                    <div className="p-2 bd-highlight"><i className="fa fa-heart" onClick={() => { likePost(d.id);}} ></i></div>
                                     <div className="p-2 bd-highlight"><i className="fa fa-comment"></i></div>
                                     <div className="p-2 bd-highlight"><i className="fa fa-send"></i></div>
                                 </div>

@@ -29,17 +29,18 @@ export default class SessionIndex extends Component {
     render() { 
         
         return (
-            <div className="col-md-12 col-sm-12 search-input-container">
-                 <div className="form-group has-search">
-                    <span className="fa fa-search form-control-feedback"></span>
-                    <input type="text" className="form-control" placeholder="Search"/>
-                </div>
-                <div className="row">
-                    <div className="container">
-                        <QuestionList/>
-                    </div>
-                </div>
-            </div>
+            // <div className="col-md-12 col-sm-12 search-input-container">
+            //      <div className="form-group has-search">
+            //         <span className="fa fa-search form-control-feedback"></span>
+            //         <input type="text" className="form-control" value={this.state.searchKeyword} onChange={evt => this.handleSearchChange(evt)} id="searchKeyword" placeholder="Search"/>
+            //     </div>
+            //     <div className="row">
+            //         <div className="container">
+            //             <QuestionList/>
+            //         </div>
+            //     </div>
+            // </div>
+            <QuestionList/>
             
         );
     }
